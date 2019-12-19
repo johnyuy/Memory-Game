@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".GameActivity">
+
+    <TextView
+        android:id="@+id/timeView"
+        android:layout_height="0dp"
+        android:layout_width="0dp"
+        android:gravity="end|center_vertical"
+        android:text="time"
+        android:textSize="25sp"
+        android:paddingRight="20sp"
+        app:layout_constraintBottom_toTopOf="@id/grid"
+        app:layout_constraintHeight_percent="0.1"
+        app:layout_constraintWidth_percent="0.5"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/scoreView"
+        />
+
+    <TextView
+        android:id="@+id/scoreView"
+        android:layout_height="0dp"
+        android:layout_width="0dp"
+        android:gravity="left|center_vertical"
+        android:text="score"
+        android:textSize="25sp"
+        android:paddingLeft="20sp"
+        app:layout_constraintBottom_toTopOf="@id/grid"
+        app:layout_constraintHeight_percent="0.1"
+        app:layout_constraintWidth_percent="0.5"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/timeView"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <LinearLayout
+        android:id="@+id/grid"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/scoreView"
+        app:layout_constraintBottom_toBottomOf="parent"
+
+        android:orientation="vertical" >
+
+        <LinearLayout style="@style/RowStyle">
+            <ImageView style="@style/ImageStyle" android:id="@+id/img01"/>
+            <ImageView style="@style/ImageStyle" android:id="@+id/img02"/>
+            <ImageView style="@style/ImageStyle" android:id="@+id/img03"/>
+        </LinearLayout>
+        <LinearLayout style="@style/RowStyle">
+            <ImageView style="@style/ImageStyle" android:id="@+id/img04"/>
+            <ImageView style="@style/ImageStyle" android:id="@+id/img05"/>
+            <ImageView style="@style/ImageStyle" android:id="@+id/img06"/>
+        </LinearLayout>
+        <LinearLayout style="@style/RowStyle">
+            <ImageView style="@style/ImageStyle" android:id="@+id/img07"/>
+            <ImageView style="@style/ImageStyle" android:id="@+id/img08"/>
+            <ImageView style="@style/ImageStyle" android:id="@+id/img09"/>
+        </LinearLayout>
+        <LinearLayout style="@style/RowStyle">
+            <ImageView style="@style/ImageStyle" android:id="@+id/img10"/>
+            <ImageView style="@style/ImageStyle" android:id="@+id/img11"/>
+            <ImageView style="@style/ImageStyle" android:id="@+id/img12"/>
+        </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/grid">
+    </TextView>
+    </LinearLayout>
+</android.support.constraint.ConstraintLayout>
