@@ -27,7 +27,7 @@
         android:id="@+id/scoreView"
         android:layout_height="0dp"
         android:layout_width="0dp"
-        android:gravity="left|center_vertical"
+        android:gravity="start|center_vertical"
         android:text="score"
         android:textSize="25sp"
         android:paddingLeft="20sp"
