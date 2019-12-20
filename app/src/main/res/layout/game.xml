@@ -48,24 +48,24 @@
         android:orientation="vertical" >
 
         <LinearLayout style="@style/RowStyle">
-            <ImageView style="@style/ImageStyle" android:id="@+id/img01"/>
-            <ImageView style="@style/ImageStyle" android:id="@+id/img02"/>
-            <ImageView style="@style/ImageStyle" android:id="@+id/img03"/>
+            <ImageView style="@style/ImageStyle" android:id="@+id/img01" android:src="@drawable/blank"/>
+            <ImageView style="@style/ImageStyle" android:id="@+id/img02" android:src="@drawable/blank"/>
+            <ImageView style="@style/ImageStyle" android:id="@+id/img03" android:src="@drawable/blank"/>
         </LinearLayout>
         <LinearLayout style="@style/RowStyle">
-            <ImageView style="@style/ImageStyle" android:id="@+id/img04"/>
-            <ImageView style="@style/ImageStyle" android:id="@+id/img05"/>
-            <ImageView style="@style/ImageStyle" android:id="@+id/img06"/>
+            <ImageView style="@style/ImageStyle" android:id="@+id/img04" android:src="@drawable/blank"/>
+            <ImageView style="@style/ImageStyle" android:id="@+id/img05" android:src="@drawable/blank"/>
+            <ImageView style="@style/ImageStyle" android:id="@+id/img06" android:src="@drawable/blank"/>
         </LinearLayout>
         <LinearLayout style="@style/RowStyle">
-            <ImageView style="@style/ImageStyle" android:id="@+id/img07"/>
-            <ImageView style="@style/ImageStyle" android:id="@+id/img08"/>
-            <ImageView style="@style/ImageStyle" android:id="@+id/img09"/>
+            <ImageView style="@style/ImageStyle" android:id="@+id/img07" android:src="@drawable/blank"/>
+            <ImageView style="@style/ImageStyle" android:id="@+id/img08" android:src="@drawable/blank"/>
+            <ImageView style="@style/ImageStyle" android:id="@+id/img09" android:src="@drawable/blank"/>
         </LinearLayout>
         <LinearLayout style="@style/RowStyle">
-            <ImageView style="@style/ImageStyle" android:id="@+id/img10"/>
-            <ImageView style="@style/ImageStyle" android:id="@+id/img11"/>
-            <ImageView style="@style/ImageStyle" android:id="@+id/img12"/>
+            <ImageView style="@style/ImageStyle" android:id="@+id/img10" android:src="@drawable/blank"/>
+            <ImageView style="@style/ImageStyle" android:id="@+id/img11" android:src="@drawable/blank"/>
+            <ImageView style="@style/ImageStyle" android:id="@+id/img12" android:src="@drawable/blank"/>
         </LinearLayout>
 
     <TextView
