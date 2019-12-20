@@ -1,5 +1,6 @@
 package com.example.memorygame;
 
+import android.view.View;
 import android.widget.ImageView;
 
 import java.util.Objects;
@@ -7,10 +8,29 @@ import java.util.Objects;
 public class GridImageView {
     private ImageView img;
     private int imageCode;
+    private  boolean isUp = false;
+    private boolean isSolved;
 
     public GridImageView(ImageView img, int imageCode) {
         this.img = img;
         this.imageCode = imageCode;
+        this.isSolved = false;
+    }
+
+    public boolean isUp() {
+        return isUp;
+    }
+
+    public void setUp(boolean up) {
+        isUp = up;
+    }
+
+    public boolean isSolved() {
+        return isSolved;
+    }
+
+    public void setSolved(boolean solved) {
+        isSolved = solved;
     }
 
     public ImageView getImg() {
@@ -42,4 +62,6 @@ public class GridImageView {
     public int hashCode() {
         return Objects.hash(img, imageCode);
     }
+
+
 }

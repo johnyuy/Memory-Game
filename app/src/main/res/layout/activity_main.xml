@@ -6,6 +6,88 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <Button
+        android:id="@+id/fetchButton"
+        android:layout_height="40dp"
+        android:layout_width="0dp"
+        android:gravity="end|center_vertical"
+        android:text="fetch"
+        android:textSize="15sp"
+        android:paddingRight="20sp"
+        app:layout_constraintBottom_toTopOf="@id/fetchGrid"
+        app:layout_constraintHeight_percent="0.1"
+        app:layout_constraintWidth_percent="0.2"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/fetchUrl"
+        android:background="@color/colorPrimaryDark"
+        android:textColor="@color/colorLight"
+        />
 
+    <EditText
+        android:id="@+id/fetchUrl"
+        android:layout_height="60dp"
+        android:layout_width="0dp"
+        android:gravity="start|center_vertical"
+        android:text="input url"
+        android:textSize="15sp"
+        android:paddingLeft="20sp"
+        app:layout_constraintBottom_toTopOf="@id/fetchGrid"
+        app:layout_constraintHeight_percent="0.1"
+        app:layout_constraintWidth_percent="0.8"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/fetchButton"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <LinearLayout
+        android:id="@+id/fetchGrid"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/fetchButton"
+        app:layout_constraintBottom_toBottomOf="parent"
+
+        android:orientation="vertical" >
+
+        <LinearLayout style="@style/RowStyle">
+            <ImageView style="@style/ImageStyle" android:id="@+id/f01" android:src="@drawable/blank"/>
+            <ImageView style="@style/ImageStyle" android:id="@+id/f02" android:src="@drawable/blank"/>
+            <ImageView style="@style/ImageStyle" android:id="@+id/f03" android:src="@drawable/blank"/>
+            <ImageView style="@style/ImageStyle" android:id="@+id/f04" android:src="@drawable/blank"/>
+        </LinearLayout>
+        <LinearLayout style="@style/RowStyle">
+            <ImageView style="@style/ImageStyle" android:id="@+id/f05" android:src="@drawable/blank"/>
+            <ImageView style="@style/ImageStyle" android:id="@+id/f06" android:src="@drawable/blank"/>
+            <ImageView style="@style/ImageStyle" android:id="@+id/f07" android:src="@drawable/blank"/>
+            <ImageView style="@style/ImageStyle" android:id="@+id/f08" android:src="@drawable/blank"/>
+        </LinearLayout>
+        <LinearLayout style="@style/RowStyle">
+            <ImageView style="@style/ImageStyle" android:id="@+id/f09" android:src="@drawable/blank"/>
+            <ImageView style="@style/ImageStyle" android:id="@+id/f10" android:src="@drawable/blank"/>
+            <ImageView style="@style/ImageStyle" android:id="@+id/f11" android:src="@drawable/blank"/>
+            <ImageView style="@style/ImageStyle" android:id="@+id/f12" android:src="@drawable/blank"/>
+        </LinearLayout>
+        <LinearLayout style="@style/RowStyle">
+            <ImageView style="@style/ImageStyle" android:id="@+id/f13" android:src="@drawable/blank"/>
+            <ImageView style="@style/ImageStyle" android:id="@+id/f14" android:src="@drawable/blank"/>
+            <ImageView style="@style/ImageStyle" android:id="@+id/f15" android:src="@drawable/blank"/>
+            <ImageView style="@style/ImageStyle" android:id="@+id/f16" android:src="@drawable/blank"/>
+        </LinearLayout>
+        <LinearLayout style="@style/RowStyle">
+            <ImageView style="@style/ImageStyle" android:id="@+id/f17" android:src="@drawable/blank"/>
+            <ImageView style="@style/ImageStyle" android:id="@+id/f18" android:src="@drawable/blank"/>
+            <ImageView style="@style/ImageStyle" android:id="@+id/f19" android:src="@drawable/blank"/>
+            <ImageView style="@style/ImageStyle" android:id="@+id/f20" android:src="@drawable/blank"/>
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/fetchGrid">
+        </TextView>
+    </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>
