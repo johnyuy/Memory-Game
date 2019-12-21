@@ -1,16 +1,15 @@
 package com.example.memorygame;
 
-import android.media.Image;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -18,6 +17,9 @@ import java.util.List;
 
 public class GameActivity extends AppCompatActivity {
     TextView timerView;
+    Button backButton;
+    Button restartButton;
+    Button toFetchButton;
     ImageView[] gameImages = new ImageView[5];
     List<GridImageView> gridImageList = null;
     GridImageView[] gridImages = new GridImageView[11];
@@ -26,17 +28,42 @@ public class GameActivity extends AppCompatActivity {
     CountUpTimer timer = null;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.game);
 
+        backButton=findViewById(R.id.menu);
+        backButton.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View v){
+                    Intent intent = new Intent(GameActivity.this, MainActivity.class);
+                    startActivity(intent);
+                }
+            });
+
+        restartButton=findViewById(R.id.restart);
+        restartButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Intent intent = getIntent();
+                finish();
+                startActivity(intent);
+            }
+        });
+
+        toFetchButton=findViewById(R.id.back);
+        toFetchButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Intent intent = new Intent(GameActivity.this, FetchImageActivity.class);
+                startActivity(intent);
+            }
+        });
+
 
         timerView = (TextView) findViewById(R.id.timerView);
-
-
-
-
         initImages();
 
         initRandom(this.gridImageList);
@@ -120,6 +147,8 @@ public class GameActivity extends AppCompatActivity {
 
 
     private void flipToShow(int gridIndex){
+
+
         Log.d("GAME SYSTEM", "CLICK NUMBER = " + clickNumber);
         flipIsUpStatus(gridIndex);
         //get layout image view id
@@ -140,6 +169,7 @@ public class GameActivity extends AppCompatActivity {
             clickNumber = 2;
 
         } else {
+
             setAllEnabled(false);
             clickNumber = 1;
             selection2 = gridIndex;
@@ -189,7 +219,7 @@ public class GameActivity extends AppCompatActivity {
     public void updateGame(View view){
         updateTimer();
         //get the grid position index
-        ImageView img = (ImageView) findViewById(view.getId());
+        ImageView img = (ImageView) findViewById(view.getId());//Id is layout Id
         String name = this.getResources().getResourceName(img.getId());
         int gridIndex = Integer.parseInt(name.substring(name.length()-2));
         Log.d("GAME SYSTEM", "grid index " + gridIndex + " selected");
@@ -215,6 +245,7 @@ public class GameActivity extends AppCompatActivity {
     }
 
     public boolean compareSelections(){
+
 
         int id1 = gridImages[selection1-1].getImageCode();
         int id2 = gridImages[selection2-1].getImageCode();
@@ -305,4 +336,6 @@ public class GameActivity extends AppCompatActivity {
         }
 
     }
+
 }
+
