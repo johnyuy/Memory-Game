@@ -28,7 +28,7 @@
         android:layout_height="0dp"
         android:layout_width="0dp"
         android:gravity="start|center_vertical"
-        android:text="score"
+        android:text="score : 0/6"
         android:textSize="25sp"
         android:paddingLeft="20sp"
         app:layout_constraintBottom_toTopOf="@id/grid"

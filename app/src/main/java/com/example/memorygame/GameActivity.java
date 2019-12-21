@@ -10,6 +10,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -150,6 +152,7 @@ public class GameActivity extends AppCompatActivity {
             if(result){
                 gridImages[selection1-1].setSolved(true);
                 gridImages[selection2-1].setSolved(true);
+                updateScore();
                 updateEnabled();
             }else {
                 hideSelections();
@@ -271,5 +274,32 @@ public class GameActivity extends AppCompatActivity {
         public void onFinish() {
             onTick(duration / 1000);
         }
+
+        private  void updateScore(){
+
+            int gameScore=0;
+            TextView text=findViewById(R.id.scoreView);
+            for(int i=0;i<gridImages.length;i++){
+                if(gridImages[i].isSolved()==true){
+                    gameScore++;
+                }
+            }
+            gameScore/=2;
+
+            text.setText("Socre: " + gameScore);
+
+        }
+    }
+
+    public void updateScore(){
+        int score =0;
+        for(int i=0; i<gridImages.length; i++){
+            if(gridImages[i].isSolved()){
+                score++;
+            }
+        }
+        score/=2;
+        TextView scoretext = (TextView) findViewById(R.id.scoreView);
+        scoretext.setText("score : " + score + "/6");
     }
 }
