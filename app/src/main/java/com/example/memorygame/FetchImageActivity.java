@@ -1,6 +1,7 @@
 package com.example.memorygame;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -15,7 +16,10 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import java.io.File;
 import java.lang.ref.WeakReference;
+import java.util.ArrayList;
+import java.util.List;
 
 public class FetchImageActivity extends AppCompatActivity
         implements AsyncHtmlSourcecode.ICallback, DownloadImage.ICallback {
@@ -32,6 +36,10 @@ public class FetchImageActivity extends AppCompatActivity
 
 
     AsyncHtmlSourcecode fetchservice = null;
+
+    // FOR CHOOSING IMAGES
+    List<File> selectedImages = new ArrayList<File>();
+    List<ImageForSelection> fullImageReference = new ArrayList<ImageForSelection>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +62,10 @@ public class FetchImageActivity extends AppCompatActivity
         fetchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(bar.getVisibility()== View.INVISIBLE ){
+                    bar.setVisibility(View.VISIBLE);
+                }
+
                 //hide keyboard
                 try {
                     InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -89,9 +101,133 @@ public class FetchImageActivity extends AppCompatActivity
                 Log.d("HTML", htmlcode);
                 fetchservice = new AsyncHtmlSourcecode(FetchImageActivity.this);
                 fetchservice.execute(htmlcode);
+                initGridReferences();
             }
         });
     }
+
+    /// CHOOSE IMAGES
+
+
+    public void initGridReferences(){
+        for(int i = 1; i<21; i++){
+            String name = "img" + String.format("%02d", i);
+            int resourceId = this.getResources().getIdentifier(name,"id", this.getPackageName());
+            ImageView imageview = (ImageView) findViewById(resourceId);
+            ImageForSelection imageForSelection = new ImageForSelection(imageview);
+            fullImageReference.add(imageForSelection);
+        }
+    }
+
+
+    public void selectedImage(View v){
+        ImageView selectedview = (ImageView)findViewById(v.getId());
+        ImageForSelection selected = new ImageForSelection();
+        int alreadyselected = 0;
+
+        // selected number 6 cannot return
+        for (ImageForSelection ifs :fullImageReference){
+            if(ifs.getImg() == selectedview){
+                ifs.setSelected(!ifs.isSelected);
+            }
+        }
+
+        for(ImageForSelection ifs :fullImageReference) {
+            if (ifs.isSelected) {
+                alreadyselected = alreadyselected + 1;
+                if(alreadyselected > 6){
+                    for (ImageForSelection ifschange :fullImageReference){
+                        if(ifs.getImg() == selectedview){
+                            ifs.setSelected(!ifs.isSelected);
+                            return;
+                        }
+                    }
+
+                }
+            }
+        }
+
+
+
+
+
+        String imgPath = this.getResources().getResourceName(v.getId());
+        int imageIndex = Integer.parseInt(imgPath.substring(imgPath.length()-2));
+        int selectednumber = 0;
+        for(ImageForSelection ifs :fullImageReference){
+            if (ifs.isSelected){
+                selectednumber = selectednumber + 1;
+                selectedImages.add(ifs.getUrlOfImg(v));
+                Log.d("INCREMENT?",  Integer.toString(selectednumber));
+                if(selectednumber == 6){
+                    Log.d("YAY ",  "NEXT BUTTON");
+
+                    //next button will appear
+
+                    //
+
+
+//                    int k=0;
+//                    for(int j = 0; j<fullImageReference.size(); j++){
+//
+//                        if (fullImageReference.get(j).isSelected){
+//                            k=k+1;
+//                            File file = new File(getFilesDir() + "/image" + Integer.toString(k) + ".jpg");
+//                            selectedImages.add(file);
+//                            Intent intent = new Intent(FetchImageActivity.this, GameActivity.class);
+//                            startActivity(intent);
+//                        }
+//
+//                    }
+
+                }
+            }
+        }
+        Log.d("END",  Integer.toString(selectednumber));
+
+    }
+
+    // CLASS
+    public class ImageForSelection {
+        private ImageView img;
+        private  boolean isSelected = false;
+
+        public ImageForSelection (){
+        }
+
+        public ImageForSelection (ImageView img){
+            this.img = img;
+            this.isSelected = false;
+        }
+
+        public ImageView getImg() {
+            return img;
+        }
+
+        public void setImg(ImageView img) {
+            this.img = img;
+        }
+
+        public boolean isSelected() {
+            return isSelected;
+        }
+
+        public void setSelected(boolean selected) {
+            isSelected = selected;
+        }
+
+        public File getUrlOfImg(View v){
+            String imgPath = v.getResources().getResourceName(v.getId());
+            int imageIndex = Integer.parseInt(imgPath.substring(imgPath.length()-2));
+
+            Log.d("IMAGE VIEW ID ",  Integer.toString(imageIndex));
+
+            File file = new File(getFilesDir() + "/image" + imageIndex + ".jpg");
+
+            return file;
+        }
+    }
+
 
 
     public void get20ImageUrlsDone(String[] imageUrls) {
