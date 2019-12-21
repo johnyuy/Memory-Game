@@ -106,7 +106,7 @@ public class FetchImageActivity extends AppCompatActivity
         Log.d("URL", progressbarid);
         int resId = getResources().getIdentifier(progressbarid, "id", getPackageName());
         ProgressBar pb = findViewById(resId);
-        pb01.setVisibility(View.GONE);
+        pb.setVisibility(View.VISIBLE);
 
     }
 

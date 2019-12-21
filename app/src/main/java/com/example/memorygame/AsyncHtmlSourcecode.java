@@ -52,7 +52,7 @@ public class AsyncHtmlSourcecode extends AsyncTask<String, Integer, String[]> {
         String nohead = sourcecode.substring(starthead, endhead);
         sourcecode = sourcecode.substring(starthead + nohead.length());
 
-        for (int i = 0; i < 20; i++) {
+        for (int i = 1; i < 21; i++) {
 
             int start = sourcecode.indexOf("img src=\"") + 9;
             int end = sourcecode.indexOf("\"", start);
@@ -60,7 +60,8 @@ public class AsyncHtmlSourcecode extends AsyncTask<String, Integer, String[]> {
 
             sourcecode = sourcecode.substring(sourcecode.indexOf("img src=\"") + src.length(), sourcecode.length());
             imageUrls[i] = src;
-            System.out.println(src);
+            Log.d("SOURCEURL", src);
+            publishProgress(i);
                 }
         } catch(MalformedURLException e){
             e.printStackTrace();
@@ -72,8 +73,18 @@ public class AsyncHtmlSourcecode extends AsyncTask<String, Integer, String[]> {
 
     @Override
     protected void onProgressUpdate(Integer[] values) {
-//        if (callback != null)
-//            callback.getSourceCodeProgress(values[0]);
+
+
+
+        if (callback != null){
+
+            int percent = values[0]*100/20;
+
+            callback.get20ImgaesUrlProgress(percent);
+
+        }
+
+
 
     }
 
@@ -90,6 +101,7 @@ public class AsyncHtmlSourcecode extends AsyncTask<String, Integer, String[]> {
 
     public interface ICallback {
         void get20ImageUrlsDone(String[] string);
+        void get20ImgaesUrlProgress(int i);
 
     }
 

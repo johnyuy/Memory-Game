@@ -8,7 +8,7 @@
     tools:context=".FetchImageActivity">
 
     <Button
-        android:id="@+id/get20images"
+        android:id="@+id/fetch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Button"
@@ -22,7 +22,7 @@
         android:ems="10"
         android:inputType="textUri"
         android:text="https://stocksnap.io/search/beach"
-        app:layout_constraintEnd_toStartOf="@+id/get20images"
+        app:layout_constraintEnd_toStartOf="@+id/fetch"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -51,7 +51,24 @@
 
         android:orientation="vertical" >
         <LinearLayout style="@style/RowStyle">
-            <ImageView style="@style/ImageStyle" android:id="@+id/img01" android:src="@drawable/blank"/>
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <ImageView style="@style/PbStyle" android:layout_width="match_parent" android:id="@+id/img01" android:src="@drawable/blank"/>
+
+                <ProgressBar
+                    android:id="@+id/pb01"
+                    style="?android:attr/progressBarStyleSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:visibility="invisible" />
+
+            </RelativeLayout>
+
             <ImageView style="@style/ImageStyle" android:id="@+id/img02" android:src="@drawable/blank"/>
             <ImageView style="@style/ImageStyle" android:id="@+id/img03" android:src="@drawable/blank"/>
             <ImageView style="@style/ImageStyle" android:id="@+id/img04" android:src="@drawable/blank"/>
