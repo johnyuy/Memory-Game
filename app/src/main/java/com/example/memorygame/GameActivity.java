@@ -2,17 +2,22 @@ package com.example.memorygame;
 
 import android.media.Image;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 public class GameActivity extends AppCompatActivity {
+    TextView timerView;
     ImageView[] gameImages = new ImageView[5];
     List<GridImageView> gridImageList = null;
     GridImageView[] gridImages = new GridImageView[11];
@@ -26,14 +31,24 @@ public class GameActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.game);
 
-//        ImageView img1 = new ImageView(this);
-//        img1.setImageResource(R.drawable.item1);
+
+        timerView = (TextView) findViewById(R.id.timerView);
+        CountUpTimer timer = new CountUpTimer(999999999) {
+            public void onTick(int second) {
+                timerView.setText(String.valueOf(second));
+            }
+        };
+
+        timer.start();
+
         initImages();
+
         initRandom(this.gridImageList);
+
         for(GridImageView img:gridImages){
             Log.d("GAME SYSTEM", "SEQUENCE imageCode = " + img.getImageCode());
         }
-        initBlanks();
+        //initBlanks();
         //initGrid();
 
 
@@ -137,11 +152,12 @@ public class GameActivity extends AppCompatActivity {
             if(result){
                 gridImages[selection1-1].setSolved(true);
                 gridImages[selection2-1].setSolved(true);
+                updateScore();
                 updateEnabled();
             }else {
                 hideSelections();
             }
-            //updateEnabled();
+
         }
         printSolvedStatus();
 
@@ -237,4 +253,53 @@ public class GameActivity extends AppCompatActivity {
         Log.d("GAME SYSTEM", " ");
     }
 
+    public abstract class CountUpTimer extends CountDownTimer {
+        private static final long INTERVAL_MS = 1000;
+        private final long duration;
+
+        protected CountUpTimer(long durationMs) {
+            super(durationMs, INTERVAL_MS);
+            this.duration = durationMs;
+        }
+
+        public abstract void onTick(int second);
+
+        @Override
+        public void onTick(long msUntilFinished) {
+            int second = (int) ((duration - msUntilFinished) / 1000);
+            onTick(second);
+        }
+
+        @Override
+        public void onFinish() {
+            onTick(duration / 1000);
+        }
+
+        private  void updateScore(){
+
+            int gameScore=0;
+            TextView text=findViewById(R.id.scoreView);
+            for(int i=0;i<gridImages.length;i++){
+                if(gridImages[i].isSolved()==true){
+                    gameScore++;
+                }
+            }
+            gameScore/=2;
+
+            text.setText("Socre: " + gameScore);
+
+        }
+    }
+
+    public void updateScore(){
+        int score =0;
+        for(int i=0; i<gridImages.length; i++){
+            if(gridImages[i].isSolved()){
+                score++;
+            }
+        }
+        score/=2;
+        TextView scoretext = (TextView) findViewById(R.id.scoreView);
+        scoretext.setText("score : " + score + "/6");
+    }
 }
