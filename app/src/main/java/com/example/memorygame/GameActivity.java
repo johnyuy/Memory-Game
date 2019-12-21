@@ -7,10 +7,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
 
 public class GameActivity extends AppCompatActivity {
     ImageView[] gameImages = new ImageView[5];
@@ -20,6 +22,8 @@ public class GameActivity extends AppCompatActivity {
     int selection1;
     int selection2;
     boolean result =false;
+    int score=0;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -133,10 +137,12 @@ public class GameActivity extends AppCompatActivity {
             clickNumber = 1;
             selection2 = gridIndex;
             result = compareSelections();
+
             Log.d("GAME SYSTEM", "result = " + result);
             if(result){
                 gridImages[selection1-1].setSolved(true);
                 gridImages[selection2-1].setSolved(true);
+                updateScore();
                 updateEnabled();
             }else {
                 hideSelections();
@@ -205,6 +211,7 @@ public class GameActivity extends AppCompatActivity {
 
         int id1 = gridImages[selection1-1].getImageCode();
         int id2 = gridImages[selection2-1].getImageCode();
+
         Log.d("GAME SYSTEM", "comparing grid " + selection1 + " and grid " + selection2);
         if(id1==id2)
             return true;
@@ -225,6 +232,7 @@ public class GameActivity extends AppCompatActivity {
             } else {
                 getGridImageView(i+1).setEnabled(true);
             }
+
         }
     }
 
@@ -235,6 +243,21 @@ public class GameActivity extends AppCompatActivity {
             Log.d("GAME SYSTEM", "Grid " + j + " = " + gridImages[i].isSolved());
         }
         Log.d("GAME SYSTEM", " ");
+    }
+
+    private  void updateScore(){
+
+        int gameScore=0;
+        TextView text=findViewById(R.id.scoreView);
+        for(int i=0;i<gridImages.length;i++){
+            if(gridImages[i].isSolved()==true){
+                gameScore++;
+            }
+        }
+        gameScore/=2;
+
+        text.setText("Socre: " + gameScore);
+
     }
 
 }
