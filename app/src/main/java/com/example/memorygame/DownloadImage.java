@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 
@@ -106,12 +107,9 @@ public class DownloadImage extends AsyncTask<String, Integer, Integer> {
 
         String progressbarid = "pb" + String.format("%02d", i);
 
-        Log.d("123123123", progressbarid);
         int pbId = parent.getResources().getIdentifier(progressbarid, "id", parent.getPackageName());
         ProgressBar pb = parent.findViewById(pbId);
         pb.setVisibility(View.GONE);
-
-        Log.d("345345345", Integer.toString(i));
 
     }
 

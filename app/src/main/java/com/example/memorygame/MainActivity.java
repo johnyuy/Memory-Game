@@ -15,6 +15,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
+
     Button fetch;
     Button game;
     List<File> selectedImages = new ArrayList<File>();
@@ -27,8 +28,6 @@ public class MainActivity extends AppCompatActivity {
         //
 
 
-
-
         fetch = findViewById(R.id.fetch);
         fetch.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -39,18 +38,24 @@ public class MainActivity extends AppCompatActivity {
         });
 
         game = findViewById(R.id.game);
-        game.setOnClickListener(new View.OnClickListener(){
+        game.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v){
+            public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, GameActivity.class);
+
+                for (int i = 1; i < 7; i++) {
+                    File file = new File(getFilesDir() + "/image" + i + ".jpg");
+                    String key = Integer.toString(i);
+                    intent.putExtra(key, file);
+                }
                 startActivity(intent);
             }
         });
 
         game = findViewById(R.id.display);
-        game.setOnClickListener(new View.OnClickListener(){
+        game.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v){
+            public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, DisplayActivity.class);
                 startActivity(intent);
             }
@@ -58,12 +63,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
     public class ImageForSelection {
         private ImageView img;
-        private  boolean isSelected = false;
+        private boolean isSelected = false;
 
-        public ImageForSelection (ImageView img){
+        public ImageForSelection(ImageView img) {
             this.img = img;
             this.isSelected = false;
         }
@@ -85,33 +89,33 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void initGridReferences (){
-        for(int i = 1; i<21; i++){
+    public void initGridReferences() {
+        for (int i = 1; i < 21; i++) {
             String name = "f" + String.format("%02d", i);
-            int resourceId = this.getResources().getIdentifier(name,"id", this.getPackageName());
-            ImageView  imageview = (ImageView) findViewById(resourceId);
+            int resourceId = this.getResources().getIdentifier(name, "id", this.getPackageName());
+            ImageView imageview = (ImageView) findViewById(resourceId);
             ImageForSelection imageForSelection = new ImageForSelection(imageview);
             fullImageReference.add(imageForSelection);
-            
+
         }
     }
 
 
-    public void selectedImage(View v){
-        ImageView selectedview = (ImageView)findViewById(v.getId());
+    public void selectedImage(View v) {
+        ImageView selectedview = (ImageView) findViewById(v.getId());
         String imgPath = this.getResources().getResourceName(v.getId());
-        int imageIndex = Integer.parseInt(imgPath.substring(imgPath.length()-2));
+        int imageIndex = Integer.parseInt(imgPath.substring(imgPath.length() - 2));
         int clickcount = 0;
-        for(int i = 0; i<fullImageReference.size(); i++){
+        for (int i = 0; i < fullImageReference.size(); i++) {
             int truecounter = 0;
-            if (fullImageReference.get(i).isSelected){
+            if (fullImageReference.get(i).isSelected) {
                 truecounter = truecounter + 1;
-                if(truecounter == 6){
-                    int k=0;
-                    for(int j = 0; j<fullImageReference.size(); j++){
+                if (truecounter == 6) {
+                    int k = 0;
+                    for (int j = 0; j < fullImageReference.size(); j++) {
 
-                        if (fullImageReference.get(j).isSelected){
-                            k=k+1;
+                        if (fullImageReference.get(j).isSelected) {
+                            k = k + 1;
                             File file = new File(getFilesDir() + "/image" + Integer.toString(k) + ".jpg");
                             selectedImages.add(file);
                             Intent intent = new Intent(MainActivity.this, GameActivity.class);
