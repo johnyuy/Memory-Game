@@ -16,10 +16,10 @@ public class GameActivity extends AppCompatActivity {
     ImageView[] gameImages = new ImageView[5];
     List<GridImageView> gridImageList = null;
     GridImageView[] gridImages = new GridImageView[11];
-    int clickNumber = 0;
+    int clickNumber = 1;
     int selection1;
     int selection2;
-
+    boolean result =false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +31,7 @@ public class GameActivity extends AppCompatActivity {
         initImages();
         initRandom(this.gridImageList);
         for(GridImageView img:gridImages){
-            Log.d("INIT STATUS", "SEQUENCE imageCode = " + img.getImageCode());
+            Log.d("GAME SYSTEM", "SEQUENCE imageCode = " + img.getImageCode());
         }
         initBlanks();
         //initGrid();
@@ -109,34 +109,8 @@ public class GameActivity extends AppCompatActivity {
 
 
     private void flipToShow(int gridIndex){
-
-
+        Log.d("GAME SYSTEM", "CLICK NUMBER = " + clickNumber);
         flipIsUpStatus(gridIndex);
-
-        //check if the current selection is first click
-        if(clickNumber==1 || clickNumber==0) {
-            getGridImageView(gridIndex).setClickable(false);
-            selection1 = gridIndex;
-            clickNumber = 2;
-        } else {
-            selection2 = gridIndex;
-            final Handler handler = new Handler();
-            handler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    //do comparison
-
-                    //disable all clicks
-                    setAllClickable(false);
-                    compareSelections();
-                }
-            },2000);
-            //enable clickable to unsolved images only
-            updateClickable();
-            //reset
-            clickNumber=1;
-        }
-
         //get layout image view id
         String imgId = "img" + String.format("%02d",gridIndex);
         int resourceId = this.getResources().getIdentifier(imgId,"id", this.getPackageName());
@@ -147,28 +121,49 @@ public class GameActivity extends AppCompatActivity {
         gridView.setImageDrawable(img.getDrawable());
         Log.d("GAME SYSTEM", "Flipped grid number " + gridIndex + " to show image");
 
+        //check if the current selection is first click
+        if(clickNumber==1) {
+
+            selection1 = gridIndex;
+            getGridImageView(selection1).setEnabled(false);
+            clickNumber = 2;
+
+        } else {
+            setAllEnabled(false);
+            clickNumber = 1;
+            selection2 = gridIndex;
+            result = compareSelections();
+            Log.d("GAME SYSTEM", "result = " + result);
+            if(result){
+                gridImages[selection1-1].setSolved(true);
+                gridImages[selection2-1].setSolved(true);
+                updateEnabled();
+            }else {
+                hideSelections();
+            }
+            //updateEnabled();
+        }
+        printSolvedStatus();
 
     }
 
     private void flipToHide(int gridIndex){
-        updateClickable();
+
         flipIsUpStatus(gridIndex);
         //get layout image view id
-        ImageView gridView = (ImageView) getGridImageView(gridIndex);
-        //set image view to blank
-        gridView.setImageResource(R.drawable.blank);
-
+        ImageView img = (ImageView) getGridImageView(gridIndex);
+        img.setImageResource(R.drawable.blank);
         Log.d("GAME SYSTEM", "Flipped grid number " + gridIndex + " to hide image");
 
     }
 
     private void flipIsUpStatus(int gridIndex){
-        Log.d("GAME SYSTEM", "flipping");
         if(gridImages[gridIndex-1].isUp()){
             gridImages[gridIndex-1].setUp(false);
         } else {
             gridImages[gridIndex-1].setUp(true);
         }
+        Log.d("GAME SYSTEM", "Grid " + gridIndex + " status = " + gridImages[gridIndex-1].isUp());
     }
 
     private ImageView getGridImageView(int gridIndex){
@@ -189,46 +184,57 @@ public class GameActivity extends AppCompatActivity {
         //flip
         if(!gridImages[gridIndex-1].isUp()){
             flipToShow(gridIndex);
-
         } else {
             //flipToHide(gridIndex);
         }
     }
 
-    public void compareSelections(){
-        setAllClickable(false);
-        int id1 = gridImages[selection1-1].getImageCode();
-        Log.d("GAME SYSTEM", "1st image id = " + id1);
-        int id2 = gridImages[selection2-1].getImageCode();
-        Log.d("GAME SYSTEM", "2nd image id = " + id2);
-        if(id1!=id2)
-        {
-            flipToHide(selection1);
-            flipToHide(selection2);
-        } else {
-            gridImages[selection1-1].setSolved(true);
-            gridImages[selection2-1].setSolved(true);
-        }
-        updateClickable();
+    private void hideSelections(){
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                flipToHide(selection1);
+                flipToHide(selection2);
+                updateEnabled();
+            }
+        }, 2000);
     }
 
-    private void setAllClickable(boolean clickable) {
+    public boolean compareSelections(){
+
+        int id1 = gridImages[selection1-1].getImageCode();
+        int id2 = gridImages[selection2-1].getImageCode();
+        Log.d("GAME SYSTEM", "comparing grid " + selection1 + " and grid " + selection2);
+        if(id1==id2)
+            return true;
+        return false;
+    }
+
+    private void setAllEnabled(boolean enabled) {
 
         for (int i = 0; i < gridImages.length; i++) {
-            getGridImageView(i + 1).setClickable(clickable);
-            getGridImageView(i + 1).setEnabled(clickable);
+            getGridImageView(i + 1).setEnabled(enabled);
         }
     }
 
-    private void updateClickable(){
+    private void updateEnabled(){
         for (int i = 0; i < gridImages.length; i++){
             if(gridImages[i].isSolved()){
-                getGridImageView(i+1).setClickable(false);
                 getGridImageView(i+1).setEnabled(false);
             } else {
-                getGridImageView(i+1).setClickable(true);
                 getGridImageView(i+1).setEnabled(true);
             }
         }
     }
+
+    private void printSolvedStatus(){
+        Log.d("GAME SYSTEM", "Solved Statuses");
+        for (int i = 0; i < gridImages.length; i++){
+            int j = i + 1;
+            Log.d("GAME SYSTEM", "Grid " + j + " = " + gridImages[i].isSolved());
+        }
+        Log.d("GAME SYSTEM", " ");
+    }
+
 }
