@@ -66,6 +66,12 @@ public class FetchImageActivity extends AppCompatActivity
                 //stop async if active
                 if (fetchservice != null) {
                     fetchservice.cancel(true);
+                    for (int k = 1; k < 21; k++) {
+                        String ImageViewStr = "img" + String.format("%02d", k);
+                        int ImagViewId = getResources().getIdentifier(ImageViewStr, "id",getPackageName());
+                        ImageView iv = findViewById(ImagViewId);
+                        iv.setImageResource(R.drawable.white);
+                    }
                 }
                 if (downloadTask != null)
                     downloadTask.cancel(true);
@@ -95,19 +101,14 @@ public class FetchImageActivity extends AppCompatActivity
     }
 
     public void get20ImgaesUrlProgress(int percent) {
+        Log.d("PERCENTAGE", Integer.toString(percent));
         bar.setProgress(percent);
     }
 
     public void onImageProgressDone(Integer result) {
-
-        String progressbarid = "pb" + String.format("%02d", result);
-
-        Log.d("RESULT", progressbarid);
-        Log.d("URL", progressbarid);
-        int resId = getResources().getIdentifier(progressbarid, "id", getPackageName());
-        ProgressBar pb = findViewById(resId);
-        pb.setVisibility(View.VISIBLE);
-
+//        int resId = getResources().getIdentifier(progressbarid, "id", getPackageName());
+//        ProgressBar pb = findViewById(resId);
+//        pb.setVisibility(View.GONE);
     }
 
 

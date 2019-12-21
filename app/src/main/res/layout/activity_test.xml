@@ -51,14 +51,11 @@
 
         android:orientation="vertical" >
         <LinearLayout style="@style/RowStyle">
-
             <RelativeLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1">
-
-                <ImageView style="@style/PbStyle" android:layout_width="match_parent" android:id="@+id/img01" android:src="@drawable/blank"/>
-
+                <ImageView style="@style/PbStyle" android:layout_width="match_parent" android:id="@+id/img01" android:src="@drawable/white"/>
                 <ProgressBar
                     android:id="@+id/pb01"
                     style="?android:attr/progressBarStyleSmall"
@@ -66,36 +63,264 @@
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
                     android:visibility="invisible" />
-
             </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+                <ImageView style="@style/PbStyle" android:layout_width="match_parent" android:id="@+id/img02" android:src="@drawable/white"/>
+                <ProgressBar
+                    android:id="@+id/pb02"
+                    style="?android:attr/progressBarStyleSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:visibility="invisible" />
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+                <ImageView style="@style/PbStyle" android:layout_width="match_parent" android:id="@+id/img03" android:src="@drawable/white"/>
+                <ProgressBar
+                    android:id="@+id/pb03"
+                    style="?android:attr/progressBarStyleSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:visibility="invisible" />
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+                <ImageView style="@style/PbStyle" android:layout_width="match_parent" android:id="@+id/img04" android:src="@drawable/white"/>
+                <ProgressBar
+                    android:id="@+id/pb04"
+                    style="?android:attr/progressBarStyleSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:visibility="invisible" />
+            </RelativeLayout>
+        </LinearLayout>
 
-            <ImageView style="@style/ImageStyle" android:id="@+id/img02" android:src="@drawable/blank"/>
-            <ImageView style="@style/ImageStyle" android:id="@+id/img03" android:src="@drawable/blank"/>
-            <ImageView style="@style/ImageStyle" android:id="@+id/img04" android:src="@drawable/blank"/>
+        <LinearLayout style="@style/RowStyle">
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+                <ImageView style="@style/PbStyle" android:layout_width="match_parent" android:id="@+id/img05" android:src="@drawable/white"/>
+                <ProgressBar
+                    android:id="@+id/pb05"
+                    style="?android:attr/progressBarStyleSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:visibility="invisible" />
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+                <ImageView style="@style/PbStyle" android:layout_width="match_parent" android:id="@+id/img06" android:src="@drawable/white"/>
+                <ProgressBar
+                    android:id="@+id/pb06"
+                    style="?android:attr/progressBarStyleSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:visibility="invisible" />
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+                <ImageView style="@style/PbStyle" android:layout_width="match_parent" android:id="@+id/img07" android:src="@drawable/white"/>
+                <ProgressBar
+                    android:id="@+id/pb07"
+                    style="?android:attr/progressBarStyleSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:visibility="invisible" />
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+                <ImageView style="@style/PbStyle" android:layout_width="match_parent" android:id="@+id/img08" android:src="@drawable/white"/>
+                <ProgressBar
+                    android:id="@+id/pb08"
+                    style="?android:attr/progressBarStyleSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:visibility="invisible" />
+            </RelativeLayout>
+        </LinearLayout>
+
+        <LinearLayout style="@style/RowStyle">
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+                <ImageView style="@style/PbStyle" android:layout_width="match_parent" android:id="@+id/img09" android:src="@drawable/white"/>
+                <ProgressBar
+                    android:id="@+id/pb09"
+                    style="?android:attr/progressBarStyleSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:visibility="invisible" />
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+                <ImageView style="@style/PbStyle" android:layout_width="match_parent" android:id="@+id/img10" android:src="@drawable/white"/>
+                <ProgressBar
+                    android:id="@+id/pb10"
+                    style="?android:attr/progressBarStyleSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:visibility="invisible" />
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+                <ImageView style="@style/PbStyle" android:layout_width="match_parent" android:id="@+id/img11" android:src="@drawable/white"/>
+                <ProgressBar
+                    android:id="@+id/pb11"
+                    style="?android:attr/progressBarStyleSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:visibility="invisible" />
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+                <ImageView style="@style/PbStyle" android:layout_width="match_parent" android:id="@+id/img12" android:src="@drawable/white"/>
+                <ProgressBar
+                    android:id="@+id/pb12"
+                    style="?android:attr/progressBarStyleSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:visibility="invisible" />
+            </RelativeLayout>
         </LinearLayout>
         <LinearLayout style="@style/RowStyle">
-            <ImageView style="@style/ImageStyle" android:id="@+id/img05" android:src="@drawable/blank"/>
-            <ImageView style="@style/ImageStyle" android:id="@+id/img06" android:src="@drawable/blank"/>
-            <ImageView style="@style/ImageStyle" android:id="@+id/img07" android:src="@drawable/blank"/>
-            <ImageView style="@style/ImageStyle" android:id="@+id/img08" android:src="@drawable/blank"/>
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+                <ImageView style="@style/PbStyle" android:layout_width="match_parent" android:id="@+id/img13" android:src="@drawable/white"/>
+                <ProgressBar
+                    android:id="@+id/pb13"
+                    style="?android:attr/progressBarStyleSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:visibility="invisible" />
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+                <ImageView style="@style/PbStyle" android:layout_width="match_parent" android:id="@+id/img14" android:src="@drawable/white"/>
+                <ProgressBar
+                    android:id="@+id/pb14"
+                    style="?android:attr/progressBarStyleSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:visibility="invisible" />
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+                <ImageView style="@style/PbStyle" android:layout_width="match_parent" android:id="@+id/img15" android:src="@drawable/white"/>
+                <ProgressBar
+                    android:id="@+id/pb15"
+                    style="?android:attr/progressBarStyleSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:visibility="invisible" />
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+                <ImageView style="@style/PbStyle" android:layout_width="match_parent" android:id="@+id/img16" android:src="@drawable/white"/>
+                <ProgressBar
+                    android:id="@+id/pb16"
+                    style="?android:attr/progressBarStyleSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:visibility="invisible" />
+            </RelativeLayout>
         </LinearLayout>
         <LinearLayout style="@style/RowStyle">
-            <ImageView style="@style/ImageStyle" android:id="@+id/img09" android:src="@drawable/blank"/>
-            <ImageView style="@style/ImageStyle" android:id="@+id/img10" android:src="@drawable/blank"/>
-            <ImageView style="@style/ImageStyle" android:id="@+id/img11" android:src="@drawable/blank"/>
-            <ImageView style="@style/ImageStyle" android:id="@+id/img12" android:src="@drawable/blank"/>
-        </LinearLayout>
-        <LinearLayout style="@style/RowStyle">
-            <ImageView style="@style/ImageStyle" android:id="@+id/img13" android:src="@drawable/blank"/>
-            <ImageView style="@style/ImageStyle" android:id="@+id/img14" android:src="@drawable/blank"/>
-            <ImageView style="@style/ImageStyle" android:id="@+id/img15" android:src="@drawable/blank"/>
-            <ImageView style="@style/ImageStyle" android:id="@+id/img16" android:src="@drawable/blank"/>
-        </LinearLayout>
-        <LinearLayout style="@style/RowStyle">
-            <ImageView style="@style/ImageStyle" android:id="@+id/img17" android:src="@drawable/blank"/>
-            <ImageView style="@style/ImageStyle" android:id="@+id/img18" android:src="@drawable/blank"/>
-            <ImageView style="@style/ImageStyle" android:id="@+id/img19" android:src="@drawable/blank"/>
-            <ImageView style="@style/ImageStyle" android:id="@+id/img20" android:src="@drawable/blank"/>
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+                <ImageView style="@style/PbStyle" android:layout_width="match_parent" android:id="@+id/img17" android:src="@drawable/white"/>
+                <ProgressBar
+                    android:id="@+id/pb17"
+                    style="?android:attr/progressBarStyleSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:visibility="invisible" />
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+                <ImageView style="@style/PbStyle" android:layout_width="match_parent" android:id="@+id/img18" android:src="@drawable/white"/>
+                <ProgressBar
+                    android:id="@+id/pb18"
+                    style="?android:attr/progressBarStyleSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:visibility="invisible" />
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+                <ImageView style="@style/PbStyle" android:layout_width="match_parent" android:id="@+id/img19" android:src="@drawable/white"/>
+                <ProgressBar
+                    android:id="@+id/pb19"
+                    style="?android:attr/progressBarStyleSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:visibility="invisible" />
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+                <ImageView style="@style/PbStyle" android:layout_width="match_parent" android:id="@+id/img20" android:src="@drawable/white"/>
+                <ProgressBar
+                    android:id="@+id/pb20"
+                    style="?android:attr/progressBarStyleSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:visibility="invisible" />
+            </RelativeLayout>
         </LinearLayout>
 
     </LinearLayout>

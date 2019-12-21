@@ -5,7 +5,9 @@ import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 
 import java.io.BufferedInputStream;
 import java.io.FileOutputStream;
@@ -28,6 +30,11 @@ public class DownloadImage extends AsyncTask<String, Integer, Integer> {
     public DownloadImage(WeakReference<AppCompatActivity> caller) {
         this.caller = caller;
     }
+
+    public DownloadImage(ICallback callback) {
+        this.caller = caller;
+    }
+
 
     @Override
     protected Integer doInBackground(String... urls) {
@@ -75,6 +82,16 @@ public class DownloadImage extends AsyncTask<String, Integer, Integer> {
 
         int i = values[0];
 
+        if (i == 1) {
+            for (int k = 1; k < 21; k++) {
+                String progressbarid = "pb" + String.format("%02d", k);
+                Log.d("123123123", progressbarid);
+                int pbId = parent.getResources().getIdentifier(progressbarid, "id", parent.getPackageName());
+                ProgressBar pb = parent.findViewById(pbId);
+                pb.setVisibility(View.VISIBLE);
+            }
+        }
+
         // to convert the image to bitmap
         Bitmap bitmap = BitmapFactory.decodeFile(imagePaths[i]);
 
@@ -83,10 +100,18 @@ public class DownloadImage extends AsyncTask<String, Integer, Integer> {
 
         Log.d("URL", imageViewId);
 
-
         int resId = parent.getResources().getIdentifier(imageViewId, "id", parent.getPackageName());
         ImageView imageView = parent.findViewById(resId);
         imageView.setImageBitmap(bitmap);
+
+        String progressbarid = "pb" + String.format("%02d", i);
+
+        Log.d("123123123", progressbarid);
+        int pbId = parent.getResources().getIdentifier(progressbarid, "id", parent.getPackageName());
+        ProgressBar pb = parent.findViewById(pbId);
+        pb.setVisibility(View.GONE);
+
+        Log.d("345345345", Integer.toString(i));
 
     }
 
@@ -99,13 +124,13 @@ public class DownloadImage extends AsyncTask<String, Integer, Integer> {
         if (callback != null) {
             callback.onImageProgressDone(result);
         }
+
     }
 
     public interface ICallback {
         void onImageProgressDone(Integer result);
 
     }
-
 
 
 }
