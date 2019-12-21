@@ -77,14 +77,10 @@ public class AsyncHtmlSourcecode extends AsyncTask<String, Integer, String[]> {
 
 
         if (callback != null){
-
             int percent = values[0]*100/20;
-
             callback.get20ImgaesUrlProgress(percent);
 
         }
-
-
 
     }
 

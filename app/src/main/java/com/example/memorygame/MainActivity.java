@@ -67,6 +67,22 @@ public class MainActivity extends AppCompatActivity {
             this.img = img;
             this.isSelected = false;
         }
+
+        public ImageView getImg() {
+            return img;
+        }
+
+        public void setImg(ImageView img) {
+            this.img = img;
+        }
+
+        public boolean isSelected() {
+            return isSelected;
+        }
+
+        public void setSelected(boolean selected) {
+            isSelected = selected;
+        }
     }
 
     public void initGridReferences (){
@@ -82,30 +98,31 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void selectedImage(View v){
-        //int selectedId = v.getId();
         ImageView selectedview = (ImageView)findViewById(v.getId());
-        //selectedImages.add(selectedview);
+        String imgPath = this.getResources().getResourceName(v.getId());
+        int imageIndex = Integer.parseInt(imgPath.substring(imgPath.length()-2));
+        int clickcount = 0;
+        for(int i = 0; i<fullImageReference.size(); i++){
+            int truecounter = 0;
+            if (fullImageReference.get(i).isSelected){
+                truecounter = truecounter + 1;
+                if(truecounter == 6){
+                    int k=0;
+                    for(int j = 0; j<fullImageReference.size(); j++){
 
-//        selectedviewif(click ==1){
-//
-//        }
-//        File file = openFileInput("image" + selectedId + ".jpg");
-//
-//
-//        selectedSix.add(file);
-//        if(selectedSix.size() == 6){
-//            Intent intent = new Intent(MainActivity.this, GameActivity.class);
-//            startActivity(intent);
-//        }
+                        if (fullImageReference.get(j).isSelected){
+                            k=k+1;
+                            File file = new File(getFilesDir() + "/image" + Integer.toString(k) + ".jpg");
+                            selectedImages.add(file);
+                            Intent intent = new Intent(MainActivity.this, GameActivity.class);
+                            startActivity(intent);
+                        }
 
-        //File file = new File(getFilesDir() + "/image" + Integer.toString(selectedId) + ".jpg");
+                    }
 
-
-
-
-
-
-
+                }
+            }
+        }
 
     }
 }
