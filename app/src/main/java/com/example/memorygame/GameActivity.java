@@ -21,10 +21,10 @@ public class GameActivity extends AppCompatActivity {
     ImageView[] gameImages = new ImageView[5];
     List<GridImageView> gridImageList = null;
     GridImageView[] gridImages = new GridImageView[11];
-    int clickNumber = 1;
-    int selection1;
-    int selection2;
-    boolean result =false;
+    int clickNumber = 1, selection1, selection2, gameScore =0;
+    boolean result =false, start = false;
+    CountUpTimer timer = null;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,13 +33,9 @@ public class GameActivity extends AppCompatActivity {
 
 
         timerView = (TextView) findViewById(R.id.timerView);
-        CountUpTimer timer = new CountUpTimer(999999999) {
-            public void onTick(int second) {
-                timerView.setText(String.valueOf(second));
-            }
-        };
 
-        timer.start();
+
+
 
         initImages();
 
@@ -160,7 +156,7 @@ public class GameActivity extends AppCompatActivity {
 
         }
         printSolvedStatus();
-
+        Log.d("GAME SYSTEM", "Score = " + gameScore);
     }
 
     private void flipToHide(int gridIndex){
@@ -190,7 +186,8 @@ public class GameActivity extends AppCompatActivity {
         return  gridView;
     }
 
-    public void flipImage(View view){
+    public void updateGame(View view){
+        updateTimer();
         //get the grid position index
         ImageView img = (ImageView) findViewById(view.getId());
         String name = this.getResources().getResourceName(img.getId());
@@ -275,20 +272,7 @@ public class GameActivity extends AppCompatActivity {
             onTick(duration / 1000);
         }
 
-        private  void updateScore(){
 
-            int gameScore=0;
-            TextView text=findViewById(R.id.scoreView);
-            for(int i=0;i<gridImages.length;i++){
-                if(gridImages[i].isSolved()==true){
-                    gameScore++;
-                }
-            }
-            gameScore/=2;
-
-            text.setText("Socre: " + gameScore);
-
-        }
     }
 
     public void updateScore(){
@@ -301,5 +285,24 @@ public class GameActivity extends AppCompatActivity {
         score/=2;
         TextView scoretext = (TextView) findViewById(R.id.scoreView);
         scoretext.setText("score : " + score + "/6");
+        gameScore = score;
+        if(gameScore==gameImages.length+1){
+            Log.d("GAME SYSTEM", "STOP " + gameScore);
+            timer.cancel();
+        }
+
+    }
+
+    public void updateTimer(){
+        if(!start){
+            start=true;
+            timer = new CountUpTimer(999999999) {
+                public void onTick(int second) {
+                    timerView.setText(String.valueOf(second));
+                }
+            };
+            timer.start();
+        }
+
     }
 }
