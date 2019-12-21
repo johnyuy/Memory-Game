@@ -84,19 +84,19 @@ public class MainActivity extends AppCompatActivity {
     public void selectedImage(View v){
         //int selectedId = v.getId();
         ImageView selectedview = (ImageView)findViewById(v.getId());
-        imageList.add(imageview);
+        //selectedImages.add(selectedview);
 
-        if(click ==1){
-
-        }
-        File file = openFileInput("image" + selectedId + ".jpg");
-
-
-        selectedSix.add(file);
-        if(selectedSix.size() == 6){
-            Intent intent = new Intent(MainActivity.this, GameActivity.class);
-            startActivity(intent);
-        }
+//        selectedviewif(click ==1){
+//
+//        }
+//        File file = openFileInput("image" + selectedId + ".jpg");
+//
+//
+//        selectedSix.add(file);
+//        if(selectedSix.size() == 6){
+//            Intent intent = new Intent(MainActivity.this, GameActivity.class);
+//            startActivity(intent);
+//        }
 
         //File file = new File(getFilesDir() + "/image" + Integer.toString(selectedId) + ".jpg");
 
