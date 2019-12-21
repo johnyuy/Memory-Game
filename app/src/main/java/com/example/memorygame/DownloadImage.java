@@ -117,6 +117,12 @@ public class DownloadImage extends AsyncTask<String, Integer, Integer> {
 
     @Override
     protected void onPostExecute(Integer result) {
+        FetchImageActivity parent = (FetchImageActivity) caller.get();
+
+        String progressbarid = "progressBar";
+        int pbId = parent.getResources().getIdentifier(progressbarid, "id", parent.getPackageName());
+        ProgressBar pb = parent.findViewById(pbId);
+        pb.setVisibility(View.INVISIBLE);
 
         if (result == null)
             return;
