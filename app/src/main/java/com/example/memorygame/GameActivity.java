@@ -2,6 +2,7 @@ package com.example.memorygame;
 
 import android.media.Image;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -9,12 +10,14 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-
 public class GameActivity extends AppCompatActivity {
+    TextView timerView;
     ImageView[] gameImages = new ImageView[5];
     List<GridImageView> gridImageList = null;
     GridImageView[] gridImages = new GridImageView[11];
@@ -22,22 +25,30 @@ public class GameActivity extends AppCompatActivity {
     int selection1;
     int selection2;
     boolean result =false;
-    int score=0;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.game);
 
-//        ImageView img1 = new ImageView(this);
-//        img1.setImageResource(R.drawable.item1);
+
+        timerView = (TextView) findViewById(R.id.timerView);
+        CountUpTimer timer = new CountUpTimer(999999999) {
+            public void onTick(int second) {
+                timerView.setText(String.valueOf(second));
+            }
+        };
+
+        timer.start();
+
         initImages();
+
         initRandom(this.gridImageList);
+
         for(GridImageView img:gridImages){
             Log.d("GAME SYSTEM", "SEQUENCE imageCode = " + img.getImageCode());
         }
-        initBlanks();
+        //initBlanks();
         //initGrid();
 
 
@@ -137,7 +148,6 @@ public class GameActivity extends AppCompatActivity {
             clickNumber = 1;
             selection2 = gridIndex;
             result = compareSelections();
-
             Log.d("GAME SYSTEM", "result = " + result);
             if(result){
                 gridImages[selection1-1].setSolved(true);
@@ -147,7 +157,7 @@ public class GameActivity extends AppCompatActivity {
             }else {
                 hideSelections();
             }
-            //updateEnabled();
+
         }
         printSolvedStatus();
 
@@ -211,7 +221,6 @@ public class GameActivity extends AppCompatActivity {
 
         int id1 = gridImages[selection1-1].getImageCode();
         int id2 = gridImages[selection2-1].getImageCode();
-
         Log.d("GAME SYSTEM", "comparing grid " + selection1 + " and grid " + selection2);
         if(id1==id2)
             return true;
@@ -232,7 +241,6 @@ public class GameActivity extends AppCompatActivity {
             } else {
                 getGridImageView(i+1).setEnabled(true);
             }
-
         }
     }
 
@@ -245,19 +253,53 @@ public class GameActivity extends AppCompatActivity {
         Log.d("GAME SYSTEM", " ");
     }
 
-    private  void updateScore(){
+    public abstract class CountUpTimer extends CountDownTimer {
+        private static final long INTERVAL_MS = 1000;
+        private final long duration;
 
-        int gameScore=0;
-        TextView text=findViewById(R.id.scoreView);
-        for(int i=0;i<gridImages.length;i++){
-            if(gridImages[i].isSolved()==true){
-                gameScore++;
-            }
+        protected CountUpTimer(long durationMs) {
+            super(durationMs, INTERVAL_MS);
+            this.duration = durationMs;
         }
-        gameScore/=2;
 
-        text.setText("Socre: " + gameScore);
+        public abstract void onTick(int second);
 
+        @Override
+        public void onTick(long msUntilFinished) {
+            int second = (int) ((duration - msUntilFinished) / 1000);
+            onTick(second);
+        }
+
+        @Override
+        public void onFinish() {
+            onTick(duration / 1000);
+        }
+
+        private  void updateScore(){
+
+            int gameScore=0;
+            TextView text=findViewById(R.id.scoreView);
+            for(int i=0;i<gridImages.length;i++){
+                if(gridImages[i].isSolved()==true){
+                    gameScore++;
+                }
+            }
+            gameScore/=2;
+
+            text.setText("Socre: " + gameScore);
+
+        }
     }
 
+    public void updateScore(){
+        int score =0;
+        for(int i=0; i<gridImages.length; i++){
+            if(gridImages[i].isSolved()){
+                score++;
+            }
+        }
+        score/=2;
+        TextView scoretext = (TextView) findViewById(R.id.scoreView);
+        scoretext.setText("score : " + score + "/6");
+    }
 }
