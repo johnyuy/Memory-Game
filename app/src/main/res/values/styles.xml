@@ -28,5 +28,11 @@
         <item name="android:layout_weight">1</item>
         <item name="android:onClick">selectedImage</item>
     </style>
+    <style name="BtnStyle">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">50dp</item>
+        <item name="android:layout_weight">1</item>
+    </style>
+
 
 </resources>
