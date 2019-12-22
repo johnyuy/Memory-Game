@@ -1,5 +1,8 @@
 package com.example.memorygame;
 
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.media.Image;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -31,11 +34,7 @@ public class GameActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.game);
 
-
         timerView = (TextView) findViewById(R.id.timerView);
-
-
-
 
         initImages();
 
@@ -46,17 +45,25 @@ public class GameActivity extends AppCompatActivity {
         }
         //initBlanks();
         //initGrid();
-
-
     }
 
     private void initImages(){
         this.gridImageList = new ArrayList<GridImageView>();
+        Intent intent = getIntent();
+        Bundle b = intent.getExtras();
         for(int i = 1; i<=6; i++){
+            Object imagefile = b.get(Integer.toString(i));
+            String imagepath = imagefile.toString();
+            Log.d("IMAGEPATH", imagepath);
+
+            Bitmap bitmap = BitmapFactory.decodeFile(imagepath);
+
             String imgId = "item" + i;
             int resourceId = this.getResources().getIdentifier(imgId,"drawable", this.getPackageName());
             ImageView img = new ImageView(this);
-            img.setImageResource(resourceId);
+
+            img.setImageBitmap(bitmap);
+
             GridImageView gimg = new GridImageView(img, i);
             this.gridImageList.add(gimg);
         }
@@ -107,6 +114,9 @@ public class GameActivity extends AppCompatActivity {
 
         for(int i = 0; i<imgList.size(); i++){
             ImageView img = this.gridImages[i].getImg();
+
+
+
             imgList.get(i).setImageDrawable(img.getDrawable());
         }
         Log.d("GAME SYSTEM", "Imported images to grid");

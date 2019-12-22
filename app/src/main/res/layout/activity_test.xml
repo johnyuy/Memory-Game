@@ -21,7 +21,7 @@
         android:layout_height="48dp"
         android:ems="10"
         android:inputType="textUri"
-        android:text="https://stocksnap.io/search/beach"
+        android:text="https://stocksnap.io/search/dogs"
         app:layout_constraintEnd_toStartOf="@+id/fetch"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

@@ -2,8 +2,6 @@ package com.example.memorygame;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -11,13 +9,11 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.webkit.URLUtil;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import java.io.File;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
@@ -39,7 +35,7 @@ public class FetchImageActivity extends AppCompatActivity
     AsyncHtmlSourcecode fetchservice = null;
 
     // FOR CHOOSING IMAGES
-    List<File> selectedImages = new ArrayList<File>();
+    List<String> selectedImages = new ArrayList<String>();
     List<ImageForSelection> fullImageReference = new ArrayList<ImageForSelection>();
 
     @Override
@@ -115,7 +111,8 @@ public class FetchImageActivity extends AppCompatActivity
             String name = "img" + String.format("%02d", i);
             int resourceId = this.getResources().getIdentifier(name, "id", this.getPackageName());
             ImageView imageview = (ImageView) findViewById(resourceId);
-            ImageForSelection imageForSelection = new ImageForSelection(imageview);
+            String filepath = getFilesDir() + "/image" + i + ".jpg";
+            ImageForSelection imageForSelection = new ImageForSelection(imageview, filepath);
             fullImageReference.add(imageForSelection);
         }
     }
@@ -132,7 +129,7 @@ public class FetchImageActivity extends AppCompatActivity
                 ifs.setSelected(!ifs.isSelected);
                 if (selectedview.getAlpha() == 0.3f) {
                     selectedview.setAlpha(1.0f);
-                }else {
+                } else {
                     selectedview.setAlpha(0.3f);
                 }
             }
@@ -161,60 +158,58 @@ public class FetchImageActivity extends AppCompatActivity
         for (ImageForSelection ifs : fullImageReference) {
             if (ifs.isSelected) {
                 selectednumber = selectednumber + 1;
-                selectedImages.add(ifs.getUrlOfImg(v));
+
                 Log.d("INCREMENT?", Integer.toString(selectednumber));
                 if (selectednumber == 6) {
-                    Log.d("YAY ", "NEXT BUTTON");
+                    Log.d("YAY ", "NEXT BUTTON WILL APPEAR");
 
-                    for (File f : selectedImages) {
-                        String print = f.toString();
-                        Log.d("FILENAMe", print);
-                        Intent intent = new Intent(FetchImageActivity.this, GameActivity.class);
-                        for (int i = 1; i < 7; i++) {
-                            File file = new File(getFilesDir() + "/image" + i + ".jpg");
-                            String key = Integer.toString(i);
-                            intent.putExtra(key, file);
+                    for (ImageForSelection si : fullImageReference) {
+                        if (si.isSelected) {
+                            Log.d("FILENAMEELVL1", si.getFilepath());
+                            selectedImages.add(si.getFilepath());
                         }
-                        startActivity(intent);
-
                     }
 
-                    //next button will appear
+                    Log.d("ImageForSelectionSIZE", Integer.toString(selectedImages.size()));
 
-                    //
-
-
-//                    int k=0;
-//                    for(int j = 0; j<fullImageReference.size(); j++){
-//
-//                        if (fullImageReference.get(j).isSelected){
-//                            k=k+1;
-//                            File file = new File(getFilesDir() + "/image" + Integer.toString(k) + ".jpg");
-//                            selectedImages.add(file);
-//                            Intent intent = new Intent(FetchImageActivity.this, GameActivity.class);
-//                            startActivity(intent);
-//                        }
-//
-//                    }
+                    Intent intent = new Intent(FetchImageActivity.this, GameActivity.class);
+                    int k = 1;
+                    for (String path : selectedImages) {
+                        Log.d("FILENAMEE", path);
+                        String key = Integer.toString(k);
+                        intent.putExtra(key, path);
+                        startActivity(intent);
+                        k++;
+                    }
+                    startActivity(intent);
 
                 }
             }
         }
         Log.d("END", Integer.toString(selectednumber));
-
     }
 
     // CLASS
     public class ImageForSelection {
         private ImageView img;
         private boolean isSelected = false;
+        private String filepath = "";
 
         public ImageForSelection() {
         }
 
-        public ImageForSelection(ImageView img) {
+        public ImageForSelection(ImageView img, String filepath) {
             this.img = img;
+            this.filepath = filepath;
             this.isSelected = false;
+        }
+
+        public String getFilepath() {
+            return filepath;
+        }
+
+        public void setFilepath(String filepath) {
+            this.filepath = filepath;
         }
 
         public ImageView getImg() {
@@ -231,17 +226,6 @@ public class FetchImageActivity extends AppCompatActivity
 
         public void setSelected(boolean selected) {
             isSelected = selected;
-        }
-
-        public File getUrlOfImg(View v) {
-            String imgPath = v.getResources().getResourceName(v.getId());
-            int imageIndex = Integer.parseInt(imgPath.substring(imgPath.length() - 2));
-
-            Log.d("IMAGE VIEW ID ", Integer.toString(imageIndex));
-
-            File file = new File(getFilesDir() + "/image" + imageIndex + ".jpg");
-
-            return file;
         }
     }
 

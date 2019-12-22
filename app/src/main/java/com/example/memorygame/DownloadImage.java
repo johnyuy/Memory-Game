@@ -86,7 +86,6 @@ public class DownloadImage extends AsyncTask<String, Integer, Integer> {
         if (i == 1) {
             for (int k = 1; k < 21; k++) {
                 String progressbarid = "pb" + String.format("%02d", k);
-                Log.d("123123123", progressbarid);
                 int pbId = parent.getResources().getIdentifier(progressbarid, "id", parent.getPackageName());
                 ProgressBar pb = parent.findViewById(pbId);
                 pb.setVisibility(View.VISIBLE);
@@ -110,6 +109,16 @@ public class DownloadImage extends AsyncTask<String, Integer, Integer> {
         int pbId = parent.getResources().getIdentifier(progressbarid, "id", parent.getPackageName());
         ProgressBar pb = parent.findViewById(pbId);
         pb.setVisibility(View.GONE);
+
+        String longprogressbarid = "progressBar";
+        int longpbId = parent.getResources().getIdentifier(longprogressbarid, "id", parent.getPackageName());
+        ProgressBar longpb = parent.findViewById(longpbId);
+
+        int percent = i*100/20;
+        Log.d("PERCENTPERCENT", Integer.toString(percent));
+
+        longpb.setProgress(percent);
+
 
     }
 
