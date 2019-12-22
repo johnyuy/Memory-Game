@@ -10,6 +10,7 @@ import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -24,9 +25,13 @@ public class GameActivity extends AppCompatActivity {
     ImageView[] gameImages = new ImageView[5];
     List<GridImageView> gridImageList = null;
     GridImageView[] gridImages = new GridImageView[11];
-    int clickNumber = 1, selection1, selection2, gameScore =0;
-    boolean result =false, start = false;
+    int clickNumber = 1, selection1, selection2, gameScore = 0;
+    boolean result = false, start = false;
     CountUpTimer timer = null;
+    List<String> ifrestartimgs = new ArrayList<String>();
+    Button menuBtn;
+    Button restartBtn;
+    Button backBtn;
 
 
     @Override
@@ -34,32 +39,72 @@ public class GameActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.game);
 
+        restartBtn = findViewById(R.id.restart);
+        restartBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                Intent intent = new Intent(GameActivity.this, GameActivity.class);
+                int k = 1;
+                for (String path : ifrestartimgs) {
+                    Log.d("FILENAMEE", path);
+                    String key = Integer.toString(k);
+                    intent.putExtra(key, path);
+                    startActivity(intent);
+                    k++;
+                }
+                intent.putExtra("from","self");
+                startActivity(intent);
+            }
+        });
+
+        backBtn = findViewById(R.id.back);
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                Intent intent = new Intent(GameActivity.this, FetchImageActivity.class);
+                intent.putExtra("from","game");
+                startActivity(intent);
+            }
+        });
+
+
+        menuBtn = findViewById(R.id.menu);
+        menuBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                Intent intent = new Intent(GameActivity.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
         timerView = (TextView) findViewById(R.id.timerView);
+
 
         initImages();
 
         initRandom(this.gridImageList);
 
-        for(GridImageView img:gridImages){
+        for (GridImageView img : gridImages) {
             Log.d("GAME SYSTEM", "SEQUENCE imageCode = " + img.getImageCode());
         }
         //initBlanks();
         //initGrid();
+
+
     }
 
-    private void initImages(){
+    private void initImages() {
         this.gridImageList = new ArrayList<GridImageView>();
         Intent intent = getIntent();
         Bundle b = intent.getExtras();
-        for(int i = 1; i<=6; i++){
-            Object imagefile = b.get(Integer.toString(i));
-            String imagepath = imagefile.toString();
-            Log.d("IMAGEPATH", imagepath);
-
+        for (int i = 1; i <= 6; i++) {
+            String imagepath = b.getString(Integer.toString(i));
             Bitmap bitmap = BitmapFactory.decodeFile(imagepath);
-
+            ifrestartimgs.add(imagepath);
+            Log.d("IMAGEPATH", imagepath);
             String imgId = "item" + i;
-            int resourceId = this.getResources().getIdentifier(imgId,"drawable", this.getPackageName());
+            int resourceId = this.getResources().getIdentifier(imgId, "drawable", this.getPackageName());
             ImageView img = new ImageView(this);
 
             img.setImageBitmap(bitmap);
@@ -72,11 +117,11 @@ public class GameActivity extends AppCompatActivity {
 
     }
 
-    private void initRandom(List<GridImageView> gridImageList){
+    private void initRandom(List<GridImageView> gridImageList) {
         List<GridImageView> gridList = new ArrayList<GridImageView>();
-        for(GridImageView img: gridImageList){
+        for (GridImageView img : gridImageList) {
             gridList.add(img);
-            GridImageView img2 = new GridImageView(img.getImg(),img.getImageCode());
+            GridImageView img2 = new GridImageView(img.getImg(), img.getImageCode());
             gridList.add(img2);
         }
         Collections.shuffle(gridList);
@@ -84,7 +129,7 @@ public class GameActivity extends AppCompatActivity {
 
     }
 
-    private void initGrid(){
+    private void initGrid() {
         List<ImageView> imgList = new ArrayList<ImageView>();
 
         ImageView img1 = (ImageView) findViewById(R.id.img01);
@@ -112,9 +157,8 @@ public class GameActivity extends AppCompatActivity {
         ImageView img12 = (ImageView) findViewById(R.id.img12);
         imgList.add(img12);
 
-        for(int i = 0; i<imgList.size(); i++){
+        for (int i = 0; i < imgList.size(); i++) {
             ImageView img = this.gridImages[i].getImg();
-
 
 
             imgList.get(i).setImageDrawable(img.getDrawable());
@@ -122,28 +166,28 @@ public class GameActivity extends AppCompatActivity {
         Log.d("GAME SYSTEM", "Imported images to grid");
     }
 
-    private void initBlanks(){
-        for(int i = 0; i< gridImages.length;i++){
+    private void initBlanks() {
+        for (int i = 0; i < gridImages.length; i++) {
             //
         }
     }
 
 
-    private void flipToShow(int gridIndex){
+    private void flipToShow(int gridIndex) {
         Log.d("GAME SYSTEM", "CLICK NUMBER = " + clickNumber);
         flipIsUpStatus(gridIndex);
         //get layout image view id
-        String imgId = "img" + String.format("%02d",gridIndex);
-        int resourceId = this.getResources().getIdentifier(imgId,"id", this.getPackageName());
+        String imgId = "img" + String.format("%02d", gridIndex);
+        int resourceId = this.getResources().getIdentifier(imgId, "id", this.getPackageName());
         ImageView gridView = (ImageView) findViewById(resourceId);
 
         //find corresponding image
-        ImageView  img = gridImages[gridIndex-1].getImg();
+        ImageView img = gridImages[gridIndex - 1].getImg();
         gridView.setImageDrawable(img.getDrawable());
         Log.d("GAME SYSTEM", "Flipped grid number " + gridIndex + " to show image");
 
         //check if the current selection is first click
-        if(clickNumber==1) {
+        if (clickNumber == 1) {
 
             selection1 = gridIndex;
             getGridImageView(selection1).setEnabled(false);
@@ -155,12 +199,12 @@ public class GameActivity extends AppCompatActivity {
             selection2 = gridIndex;
             result = compareSelections();
             Log.d("GAME SYSTEM", "result = " + result);
-            if(result){
-                gridImages[selection1-1].setSolved(true);
-                gridImages[selection2-1].setSolved(true);
+            if (result) {
+                gridImages[selection1 - 1].setSolved(true);
+                gridImages[selection2 - 1].setSolved(true);
                 updateScore();
                 updateEnabled();
-            }else {
+            } else {
                 hideSelections();
             }
 
@@ -169,7 +213,7 @@ public class GameActivity extends AppCompatActivity {
         Log.d("GAME SYSTEM", "Score = " + gameScore);
     }
 
-    private void flipToHide(int gridIndex){
+    private void flipToHide(int gridIndex) {
 
         flipIsUpStatus(gridIndex);
         //get layout image view id
@@ -179,40 +223,40 @@ public class GameActivity extends AppCompatActivity {
 
     }
 
-    private void flipIsUpStatus(int gridIndex){
-        if(gridImages[gridIndex-1].isUp()){
-            gridImages[gridIndex-1].setUp(false);
+    private void flipIsUpStatus(int gridIndex) {
+        if (gridImages[gridIndex - 1].isUp()) {
+            gridImages[gridIndex - 1].setUp(false);
         } else {
-            gridImages[gridIndex-1].setUp(true);
+            gridImages[gridIndex - 1].setUp(true);
         }
-        Log.d("GAME SYSTEM", "Grid " + gridIndex + " status = " + gridImages[gridIndex-1].isUp());
+        Log.d("GAME SYSTEM", "Grid " + gridIndex + " status = " + gridImages[gridIndex - 1].isUp());
     }
 
-    private ImageView getGridImageView(int gridIndex){
+    private ImageView getGridImageView(int gridIndex) {
         //get layout image view id
-        String gridId = "img" + String.format("%02d",gridIndex);
-        int resourceId = this.getResources().getIdentifier(gridId,"id", this.getPackageName());
+        String gridId = "img" + String.format("%02d", gridIndex);
+        int resourceId = this.getResources().getIdentifier(gridId, "id", this.getPackageName());
         ImageView gridView = (ImageView) findViewById(resourceId);
-        return  gridView;
+        return gridView;
     }
 
-    public void updateGame(View view){
+    public void updateGame(View view) {
         updateTimer();
         //get the grid position index
         ImageView img = (ImageView) findViewById(view.getId());
         String name = this.getResources().getResourceName(img.getId());
-        int gridIndex = Integer.parseInt(name.substring(name.length()-2));
+        int gridIndex = Integer.parseInt(name.substring(name.length() - 2));
         Log.d("GAME SYSTEM", "grid index " + gridIndex + " selected");
 
         //flip
-        if(!gridImages[gridIndex-1].isUp()){
+        if (!gridImages[gridIndex - 1].isUp()) {
             flipToShow(gridIndex);
         } else {
             //flipToHide(gridIndex);
         }
     }
 
-    private void hideSelections(){
+    private void hideSelections() {
         final Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
@@ -224,12 +268,12 @@ public class GameActivity extends AppCompatActivity {
         }, 2000);
     }
 
-    public boolean compareSelections(){
+    public boolean compareSelections() {
 
-        int id1 = gridImages[selection1-1].getImageCode();
-        int id2 = gridImages[selection2-1].getImageCode();
+        int id1 = gridImages[selection1 - 1].getImageCode();
+        int id2 = gridImages[selection2 - 1].getImageCode();
         Log.d("GAME SYSTEM", "comparing grid " + selection1 + " and grid " + selection2);
-        if(id1==id2)
+        if (id1 == id2)
             return true;
         return false;
     }
@@ -241,19 +285,19 @@ public class GameActivity extends AppCompatActivity {
         }
     }
 
-    private void updateEnabled(){
-        for (int i = 0; i < gridImages.length; i++){
-            if(gridImages[i].isSolved()){
-                getGridImageView(i+1).setEnabled(false);
+    private void updateEnabled() {
+        for (int i = 0; i < gridImages.length; i++) {
+            if (gridImages[i].isSolved()) {
+                getGridImageView(i + 1).setEnabled(false);
             } else {
-                getGridImageView(i+1).setEnabled(true);
+                getGridImageView(i + 1).setEnabled(true);
             }
         }
     }
 
-    private void printSolvedStatus(){
+    private void printSolvedStatus() {
         Log.d("GAME SYSTEM", "Solved Statuses");
-        for (int i = 0; i < gridImages.length; i++){
+        for (int i = 0; i < gridImages.length; i++) {
             int j = i + 1;
             Log.d("GAME SYSTEM", "Grid " + j + " = " + gridImages[i].isSolved());
         }
@@ -285,27 +329,27 @@ public class GameActivity extends AppCompatActivity {
 
     }
 
-    public void updateScore(){
-        int score =0;
-        for(int i=0; i<gridImages.length; i++){
-            if(gridImages[i].isSolved()){
+    public void updateScore() {
+        int score = 0;
+        for (int i = 0; i < gridImages.length; i++) {
+            if (gridImages[i].isSolved()) {
                 score++;
             }
         }
-        score/=2;
+        score /= 2;
         TextView scoretext = (TextView) findViewById(R.id.scoreView);
         scoretext.setText("score : " + score + "/6");
         gameScore = score;
-        if(gameScore==gameImages.length+1){
+        if (gameScore == gameImages.length + 1) {
             Log.d("GAME SYSTEM", "STOP " + gameScore);
             timer.cancel();
         }
 
     }
 
-    public void updateTimer(){
-        if(!start){
-            start=true;
+    public void updateTimer() {
+        if (!start) {
+            start = true;
             timer = new CountUpTimer(999999999) {
                 public void onTick(int second) {
                     timerView.setText(String.valueOf(second));

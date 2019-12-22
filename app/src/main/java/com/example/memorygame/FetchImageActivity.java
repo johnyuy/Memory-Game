@@ -2,7 +2,10 @@ package com.example.memorygame;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.support.annotation.IntegerRes;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -21,7 +24,7 @@ import java.util.List;
 public class FetchImageActivity extends AppCompatActivity
         implements AsyncHtmlSourcecode.ICallback, DownloadImage.ICallback {
 
-    private String[] imagePaths = new String[20];
+    private String[] imagePaths = new String[21];
     Button fetchBtn;
     EditText htmlTxt;
 
@@ -45,8 +48,20 @@ public class FetchImageActivity extends AppCompatActivity
 
         String imagePath;
         for (int i = 1; i < imagePaths.length; i++) {
+            Log.d("BACKFROMGAME ", Integer.toString(i));
             imagePath = getFilesDir() + "/image" + i + ".jpg";
             imagePaths[i] = imagePath;
+        }
+
+        // IF INTENT FROM GAME ACTIVITY
+        Intent intent = getIntent();
+        Bundle b = intent.getExtras();
+        if (b != null) {
+            if (b.getString("from").equals("game")) {
+                //DISPLAY PREVIOUS SEARCH
+                fromGameReload();
+
+            }
         }
 
 
@@ -54,7 +69,7 @@ public class FetchImageActivity extends AppCompatActivity
         bar = findViewById(R.id.progressBar);
         pb01 = findViewById(R.id.pb01);
 
-
+        initGridReferences();
         fetchBtn = findViewById(R.id.fetch);
         fetchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,7 +77,6 @@ public class FetchImageActivity extends AppCompatActivity
                 if (bar.getVisibility() == View.INVISIBLE) {
                     bar.setVisibility(View.VISIBLE);
                 }
-
                 //hide keyboard
                 try {
                     InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -70,7 +84,6 @@ public class FetchImageActivity extends AppCompatActivity
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-
 
                 //stop async if active
                 if (fetchservice != null) {
@@ -98,13 +111,26 @@ public class FetchImageActivity extends AppCompatActivity
                 Log.d("HTML", htmlcode);
                 fetchservice = new AsyncHtmlSourcecode(FetchImageActivity.this);
                 fetchservice.execute(htmlcode);
-                initGridReferences();
             }
         });
+        Log.d("BACKFROMGAME ", "COMPLETE");
     }
 
     /// CHOOSE IMAGES
 
+    public void fromGameReload() {
+        for (int i = 1; i < imagePaths.length; i++) {
+            Log.d("BACKFROMGAME ", Integer.toString(i) + "RELOAD");
+            // to convert the image to bitmap
+            Bitmap bitmap = BitmapFactory.decodeFile(imagePaths[i]);
+            // to display the image on screen
+            String imageViewId = "img" + String.format("%02d", i);
+            Log.d("URL", imageViewId);
+            int resId = getResources().getIdentifier(imageViewId, "id", getPackageName());
+            ImageView imageView = findViewById(resId);
+            imageView.setImageBitmap(bitmap);
+        }
+    }
 
     public void initGridReferences() {
         for (int i = 1; i < 21; i++) {
