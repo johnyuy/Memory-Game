@@ -6,6 +6,47 @@
     android:layout_height="match_parent"
     tools:context=".FetchImageActivity">
 
+    <LinearLayout
+        android:id="@+id/buttons"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/grid"
+        app:layout_constraintTop_toBottomOf="@id/progressBar">
+
+
+        <Button
+            android:id="@+id/bear"
+            style="@style/BtnStyle"
+            android:text="bear"
+            android:textSize="15sp" />
+
+        <Button
+            android:id="@+id/dog"
+            style="@style/BtnStyle"
+            android:text="dog"
+            android:textSize="15sp" />
+
+        <Button
+            android:id="@+id/cat"
+            style="@style/BtnStyle"
+            android:text="cat"
+            android:textSize="15sp" />
+
+        <Button
+            android:id="@+id/beach"
+            style="@style/BtnStyle"
+            android:text="beach"
+            android:textSize="15sp" />
+
+        <Button
+            android:id="@+id/nature"
+            style="@style/BtnStyle"
+            android:text="nature"
+            android:textSize="15sp" />
+
+    </LinearLayout>
+
     <Button
         android:id="@+id/fetch"
         android:layout_width="wrap_content"
@@ -56,16 +97,24 @@
         android:id="@+id/grid"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@id/progressBar"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
 
-        android:orientation="vertical" >
+        app:layout_constraintTop_toBottomOf="@id/buttons">
+
         <LinearLayout style="@style/RowStyle">
+
             <RelativeLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1">
-                <ImageView style="@style/PbStyle" android:layout_width="match_parent" android:id="@+id/img01" android:src="@drawable/white"/>
+
+                <ImageView
+                    android:id="@+id/img01"
+                    style="@style/PbStyle"
+                    android:layout_width="match_parent"
+                    android:src="@drawable/white" />
+
                 <ProgressBar
                     android:id="@+id/pb01"
                     style="?android:attr/progressBarStyleSmall"
@@ -73,19 +122,27 @@
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
                     android:visibility="invisible" />
+
                 <CheckBox
                     android:id="@+id/cb01"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
                     android:layout_alignParentTop="true"
-                    android:visibility="invisible"/>
+                    android:layout_alignParentRight="true"
+                    android:visibility="invisible" />
             </RelativeLayout>
+
             <RelativeLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1">
-                <ImageView style="@style/PbStyle" android:layout_width="match_parent" android:id="@+id/img02" android:src="@drawable/white"/>
+
+                <ImageView
+                    android:id="@+id/img02"
+                    style="@style/PbStyle"
+                    android:layout_width="match_parent"
+                    android:src="@drawable/white" />
+
                 <ProgressBar
                     android:id="@+id/pb02"
                     style="?android:attr/progressBarStyleSmall"
@@ -93,19 +150,27 @@
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
                     android:visibility="invisible" />
+
                 <CheckBox
                     android:id="@+id/cb02"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
                     android:layout_alignParentTop="true"
-                    android:visibility="invisible"/>
+                    android:layout_alignParentRight="true"
+                    android:visibility="invisible" />
             </RelativeLayout>
+
             <RelativeLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1">
-                <ImageView style="@style/PbStyle" android:layout_width="match_parent" android:id="@+id/img03" android:src="@drawable/white"/>
+
+                <ImageView
+                    android:id="@+id/img03"
+                    style="@style/PbStyle"
+                    android:layout_width="match_parent"
+                    android:src="@drawable/white" />
+
                 <ProgressBar
                     android:id="@+id/pb03"
                     style="?android:attr/progressBarStyleSmall"
@@ -113,19 +178,27 @@
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
                     android:visibility="invisible" />
+
                 <CheckBox
                     android:id="@+id/cb03"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
                     android:layout_alignParentTop="true"
-                    android:visibility="invisible"/>
+                    android:layout_alignParentRight="true"
+                    android:visibility="invisible" />
             </RelativeLayout>
+
             <RelativeLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1">
-                <ImageView style="@style/PbStyle" android:layout_width="match_parent" android:id="@+id/img04" android:src="@drawable/white"/>
+
+                <ImageView
+                    android:id="@+id/img04"
+                    style="@style/PbStyle"
+                    android:layout_width="match_parent"
+                    android:src="@drawable/white" />
+
                 <ProgressBar
                     android:id="@+id/pb04"
                     style="?android:attr/progressBarStyleSmall"
@@ -133,22 +206,30 @@
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
                     android:visibility="invisible" />
+
                 <CheckBox
                     android:id="@+id/cb04"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
                     android:layout_alignParentTop="true"
-                    android:visibility="invisible"/>
+                    android:layout_alignParentRight="true"
+                    android:visibility="invisible" />
             </RelativeLayout>
         </LinearLayout>
 
         <LinearLayout style="@style/RowStyle">
+
             <RelativeLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1">
-                <ImageView style="@style/PbStyle" android:layout_width="match_parent" android:id="@+id/img05" android:src="@drawable/white"/>
+
+                <ImageView
+                    android:id="@+id/img05"
+                    style="@style/PbStyle"
+                    android:layout_width="match_parent"
+                    android:src="@drawable/white" />
+
                 <ProgressBar
                     android:id="@+id/pb05"
                     style="?android:attr/progressBarStyleSmall"
@@ -156,19 +237,27 @@
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
                     android:visibility="invisible" />
+
                 <CheckBox
                     android:id="@+id/cb05"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
                     android:layout_alignParentTop="true"
-                    android:visibility="invisible"/>
+                    android:layout_alignParentRight="true"
+                    android:visibility="invisible" />
             </RelativeLayout>
+
             <RelativeLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1">
-                <ImageView style="@style/PbStyle" android:layout_width="match_parent" android:id="@+id/img06" android:src="@drawable/white"/>
+
+                <ImageView
+                    android:id="@+id/img06"
+                    style="@style/PbStyle"
+                    android:layout_width="match_parent"
+                    android:src="@drawable/white" />
+
                 <ProgressBar
                     android:id="@+id/pb06"
                     style="?android:attr/progressBarStyleSmall"
@@ -176,19 +265,27 @@
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
                     android:visibility="invisible" />
+
                 <CheckBox
                     android:id="@+id/cb06"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
                     android:layout_alignParentTop="true"
-                    android:visibility="invisible"/>
+                    android:layout_alignParentRight="true"
+                    android:visibility="invisible" />
             </RelativeLayout>
+
             <RelativeLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1">
-                <ImageView style="@style/PbStyle" android:layout_width="match_parent" android:id="@+id/img07" android:src="@drawable/white"/>
+
+                <ImageView
+                    android:id="@+id/img07"
+                    style="@style/PbStyle"
+                    android:layout_width="match_parent"
+                    android:src="@drawable/white" />
+
                 <ProgressBar
                     android:id="@+id/pb07"
                     style="?android:attr/progressBarStyleSmall"
@@ -196,19 +293,27 @@
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
                     android:visibility="invisible" />
+
                 <CheckBox
                     android:id="@+id/cb07"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
                     android:layout_alignParentTop="true"
-                    android:visibility="invisible"/>
+                    android:layout_alignParentRight="true"
+                    android:visibility="invisible" />
             </RelativeLayout>
+
             <RelativeLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1">
-                <ImageView style="@style/PbStyle" android:layout_width="match_parent" android:id="@+id/img08" android:src="@drawable/white"/>
+
+                <ImageView
+                    android:id="@+id/img08"
+                    style="@style/PbStyle"
+                    android:layout_width="match_parent"
+                    android:src="@drawable/white" />
+
                 <ProgressBar
                     android:id="@+id/pb08"
                     style="?android:attr/progressBarStyleSmall"
@@ -216,22 +321,30 @@
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
                     android:visibility="invisible" />
+
                 <CheckBox
                     android:id="@+id/cb08"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
                     android:layout_alignParentTop="true"
-                    android:visibility="invisible"/>
+                    android:layout_alignParentRight="true"
+                    android:visibility="invisible" />
             </RelativeLayout>
         </LinearLayout>
 
         <LinearLayout style="@style/RowStyle">
+
             <RelativeLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1">
-                <ImageView style="@style/PbStyle" android:layout_width="match_parent" android:id="@+id/img09" android:src="@drawable/white"/>
+
+                <ImageView
+                    android:id="@+id/img09"
+                    style="@style/PbStyle"
+                    android:layout_width="match_parent"
+                    android:src="@drawable/white" />
+
                 <ProgressBar
                     android:id="@+id/pb09"
                     style="?android:attr/progressBarStyleSmall"
@@ -239,19 +352,27 @@
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
                     android:visibility="invisible" />
+
                 <CheckBox
                     android:id="@+id/cb09"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
                     android:layout_alignParentTop="true"
-                    android:visibility="invisible"/>
+                    android:layout_alignParentRight="true"
+                    android:visibility="invisible" />
             </RelativeLayout>
+
             <RelativeLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1">
-                <ImageView style="@style/PbStyle" android:layout_width="match_parent" android:id="@+id/img10" android:src="@drawable/white"/>
+
+                <ImageView
+                    android:id="@+id/img10"
+                    style="@style/PbStyle"
+                    android:layout_width="match_parent"
+                    android:src="@drawable/white" />
+
                 <ProgressBar
                     android:id="@+id/pb10"
                     style="?android:attr/progressBarStyleSmall"
@@ -259,20 +380,27 @@
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
                     android:visibility="invisible" />
+
                 <CheckBox
                     android:id="@+id/cb10"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
                     android:layout_alignParentTop="true"
-                    android:visibility="invisible"/>
+                    android:layout_alignParentRight="true"
+                    android:visibility="invisible" />
             </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1">
-                <ImageView style="@style/PbStyle" android:layout_width="match_parent" android:id="@+id/img11" android:src="@drawable/white"/>
+
+                <ImageView
+                    android:id="@+id/img11"
+                    style="@style/PbStyle"
+                    android:layout_width="match_parent"
+                    android:src="@drawable/white" />
+
                 <ProgressBar
                     android:id="@+id/pb11"
                     style="?android:attr/progressBarStyleSmall"
@@ -280,19 +408,27 @@
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
                     android:visibility="invisible" />
+
                 <CheckBox
                     android:id="@+id/cb11"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
                     android:layout_alignParentTop="true"
-                    android:visibility="invisible"/>
+                    android:layout_alignParentRight="true"
+                    android:visibility="invisible" />
             </RelativeLayout>
+
             <RelativeLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1">
-                <ImageView style="@style/PbStyle" android:layout_width="match_parent" android:id="@+id/img12" android:src="@drawable/white"/>
+
+                <ImageView
+                    android:id="@+id/img12"
+                    style="@style/PbStyle"
+                    android:layout_width="match_parent"
+                    android:src="@drawable/white" />
+
                 <ProgressBar
                     android:id="@+id/pb12"
                     style="?android:attr/progressBarStyleSmall"
@@ -300,21 +436,30 @@
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
                     android:visibility="invisible" />
+
                 <CheckBox
                     android:id="@+id/cb12"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
                     android:layout_alignParentTop="true"
-                    android:visibility="invisible"/>
+                    android:layout_alignParentRight="true"
+                    android:visibility="invisible" />
             </RelativeLayout>
         </LinearLayout>
+
         <LinearLayout style="@style/RowStyle">
+
             <RelativeLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1">
-                <ImageView style="@style/PbStyle" android:layout_width="match_parent" android:id="@+id/img13" android:src="@drawable/white"/>
+
+                <ImageView
+                    android:id="@+id/img13"
+                    style="@style/PbStyle"
+                    android:layout_width="match_parent"
+                    android:src="@drawable/white" />
+
                 <ProgressBar
                     android:id="@+id/pb13"
                     style="?android:attr/progressBarStyleSmall"
@@ -322,19 +467,27 @@
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
                     android:visibility="invisible" />
+
                 <CheckBox
                     android:id="@+id/cb13"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
                     android:layout_alignParentTop="true"
-                    android:visibility="invisible"/>
+                    android:layout_alignParentRight="true"
+                    android:visibility="invisible" />
             </RelativeLayout>
+
             <RelativeLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1">
-                <ImageView style="@style/PbStyle" android:layout_width="match_parent" android:id="@+id/img14" android:src="@drawable/white"/>
+
+                <ImageView
+                    android:id="@+id/img14"
+                    style="@style/PbStyle"
+                    android:layout_width="match_parent"
+                    android:src="@drawable/white" />
+
                 <ProgressBar
                     android:id="@+id/pb14"
                     style="?android:attr/progressBarStyleSmall"
@@ -342,19 +495,27 @@
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
                     android:visibility="invisible" />
+
                 <CheckBox
                     android:id="@+id/cb14"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
                     android:layout_alignParentTop="true"
-                    android:visibility="invisible"/>
+                    android:layout_alignParentRight="true"
+                    android:visibility="invisible" />
             </RelativeLayout>
+
             <RelativeLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1">
-                <ImageView style="@style/PbStyle" android:layout_width="match_parent" android:id="@+id/img15" android:src="@drawable/white"/>
+
+                <ImageView
+                    android:id="@+id/img15"
+                    style="@style/PbStyle"
+                    android:layout_width="match_parent"
+                    android:src="@drawable/white" />
+
                 <ProgressBar
                     android:id="@+id/pb15"
                     style="?android:attr/progressBarStyleSmall"
@@ -362,19 +523,27 @@
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
                     android:visibility="invisible" />
+
                 <CheckBox
                     android:id="@+id/cb15"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
                     android:layout_alignParentTop="true"
-                    android:visibility="invisible"/>
+                    android:layout_alignParentRight="true"
+                    android:visibility="invisible" />
             </RelativeLayout>
+
             <RelativeLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1">
-                <ImageView style="@style/PbStyle" android:layout_width="match_parent" android:id="@+id/img16" android:src="@drawable/white"/>
+
+                <ImageView
+                    android:id="@+id/img16"
+                    style="@style/PbStyle"
+                    android:layout_width="match_parent"
+                    android:src="@drawable/white" />
+
                 <ProgressBar
                     android:id="@+id/pb16"
                     style="?android:attr/progressBarStyleSmall"
@@ -382,21 +551,30 @@
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
                     android:visibility="invisible" />
+
                 <CheckBox
                     android:id="@+id/cb16"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
                     android:layout_alignParentTop="true"
-                    android:visibility="invisible"/>
+                    android:layout_alignParentRight="true"
+                    android:visibility="invisible" />
             </RelativeLayout>
         </LinearLayout>
+
         <LinearLayout style="@style/RowStyle">
+
             <RelativeLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1">
-                <ImageView style="@style/PbStyle" android:layout_width="match_parent" android:id="@+id/img17" android:src="@drawable/white"/>
+
+                <ImageView
+                    android:id="@+id/img17"
+                    style="@style/PbStyle"
+                    android:layout_width="match_parent"
+                    android:src="@drawable/white" />
+
                 <ProgressBar
                     android:id="@+id/pb17"
                     style="?android:attr/progressBarStyleSmall"
@@ -404,19 +582,27 @@
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
                     android:visibility="invisible" />
+
                 <CheckBox
                     android:id="@+id/cb17"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
                     android:layout_alignParentTop="true"
-                    android:visibility="invisible"/>
+                    android:layout_alignParentRight="true"
+                    android:visibility="invisible" />
             </RelativeLayout>
+
             <RelativeLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1">
-                <ImageView style="@style/PbStyle" android:layout_width="match_parent" android:id="@+id/img18" android:src="@drawable/white"/>
+
+                <ImageView
+                    android:id="@+id/img18"
+                    style="@style/PbStyle"
+                    android:layout_width="match_parent"
+                    android:src="@drawable/white" />
+
                 <ProgressBar
                     android:id="@+id/pb18"
                     style="?android:attr/progressBarStyleSmall"
@@ -424,19 +610,27 @@
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
                     android:visibility="invisible" />
+
                 <CheckBox
                     android:id="@+id/cb18"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
                     android:layout_alignParentTop="true"
-                    android:visibility="invisible"/>
+                    android:layout_alignParentRight="true"
+                    android:visibility="invisible" />
             </RelativeLayout>
+
             <RelativeLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1">
-                <ImageView style="@style/PbStyle" android:layout_width="match_parent" android:id="@+id/img19" android:src="@drawable/white"/>
+
+                <ImageView
+                    android:id="@+id/img19"
+                    style="@style/PbStyle"
+                    android:layout_width="match_parent"
+                    android:src="@drawable/white" />
+
                 <ProgressBar
                     android:id="@+id/pb19"
                     style="?android:attr/progressBarStyleSmall"
@@ -444,19 +638,27 @@
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
                     android:visibility="invisible" />
+
                 <CheckBox
                     android:id="@+id/cb19"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
                     android:layout_alignParentTop="true"
-                    android:visibility="invisible"/>
+                    android:layout_alignParentRight="true"
+                    android:visibility="invisible" />
             </RelativeLayout>
+
             <RelativeLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1">
-                <ImageView style="@style/PbStyle" android:layout_width="match_parent" android:id="@+id/img20" android:src="@drawable/white"/>
+
+                <ImageView
+                    android:id="@+id/img20"
+                    style="@style/PbStyle"
+                    android:layout_width="match_parent"
+                    android:src="@drawable/white" />
+
                 <ProgressBar
                     android:id="@+id/pb20"
                     style="?android:attr/progressBarStyleSmall"
@@ -464,13 +666,14 @@
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
                     android:visibility="invisible" />
+
                 <CheckBox
                     android:id="@+id/cb20"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
                     android:layout_alignParentTop="true"
-                    android:visibility="invisible"/>
+                    android:layout_alignParentRight="true"
+                    android:visibility="invisible" />
 
             </RelativeLayout>
         </LinearLayout>
