@@ -380,6 +380,7 @@ public class FetchImageActivity extends AppCompatActivity
         ImageView selectedview = (ImageView) findViewById(v.getId());
         ImageForSelection selected = new ImageForSelection();
         int alreadyselected = 0;
+        playbtn.setEnabled(false);
 
         // selected number 6 cannot return
         for (ImageForSelection ifs : fullImageReference) {
@@ -398,8 +399,8 @@ public class FetchImageActivity extends AppCompatActivity
                 alreadyselected = alreadyselected + 1;
                 if (alreadyselected > 6) {
                     for (ImageForSelection ifschange : fullImageReference) {
-                        if (ifs.getImg() == selectedview) {
-                            ifs.setSelected(!ifs.isSelected);
+                        if (ifschange.getImg() == selectedview) {
+                            ifschange.setSelected(!ifschange.isSelected);
                             selectedview.setAlpha(1.0f);
                             return;
                         }
@@ -420,26 +421,29 @@ public class FetchImageActivity extends AppCompatActivity
                 Log.d("INCREMENT?", Integer.toString(selectednumber));
                 if (selectednumber == 6) {
                     Log.d("YAY ", "NEXT BUTTON WILL APPEAR");
+                    playbtn.setEnabled(true);
 
-                    for (ImageForSelection si : fullImageReference) {
-                        if (si.isSelected) {
-                            Log.d("FILENAMEELVL1", si.getFilepath());
-                            selectedImages.add(si.getFilepath());
-                        }
-                    }
 
-                    Log.d("ImageForSelectionSIZE", Integer.toString(selectedImages.size()));
 
-                    Intent intent = new Intent(FetchImageActivity.this, GameActivity.class);
-                    int k = 1;
-                    for (String path : selectedImages) {
-                        Log.d("FILENAMEE", path);
-                        String key = Integer.toString(k);
-                        intent.putExtra(key, path);
-                        startActivity(intent);
-                        k++;
-                    }
-                    startActivity(intent);
+//                    for (ImageForSelection si : fullImageReference) {
+//                        if (si.isSelected) {
+//                            Log.d("FILENAMEELVL1", si.getFilepath());
+//                            selectedImages.add(si.getFilepath());
+//                        }
+//                    }
+//
+//                    Log.d("ImageForSelectionSIZE", Integer.toString(selectedImages.size()));
+//
+//                    Intent intent = new Intent(FetchImageActivity.this, GameActivity.class);
+//                    int k = 1;
+//                    for (String path : selectedImages) {
+//                        Log.d("FILENAMEE", path);
+//                        String key = Integer.toString(k);
+//                        intent.putExtra(key, path);
+//                        startActivity(intent);
+//                        k++;
+//                    }
+//                    startActivity(intent);
 
                 }
             }
