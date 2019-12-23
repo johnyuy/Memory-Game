@@ -2,6 +2,7 @@ package com.example.memorygame;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -26,6 +27,18 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         //
+
+        // try initiating highscores
+        SharedPreferences highscore = getSharedPreferences(
+                "high_score", MODE_PRIVATE);
+        SharedPreferences.Editor editor = highscore.edit();
+        for(int i = 1; i<7; i++) {
+            editor.putString(Integer.toString(i), Integer.toString(i * 120));
+        }
+        editor.commit();
+
+
+
 
 
         fetch = findViewById(R.id.fetch);

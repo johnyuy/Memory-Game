@@ -47,7 +47,6 @@ public class FetchImageActivity extends AppCompatActivity
 
         String imagePath;
         for (int i = 1; i < imagePaths.length; i++) {
-            Log.d("BACKFROMGAME ", Integer.toString(i));
             imagePath = getFilesDir() + "/image" + i + ".jpg";
             imagePaths[i] = imagePath;
         }
@@ -106,7 +105,6 @@ public class FetchImageActivity extends AppCompatActivity
                 fetchservice.execute(htmlcode);
             }
         });
-        Log.d("BACKFROMGAME ", "COMPLETE");
     }
 
     /// CHOOSE IMAGES
