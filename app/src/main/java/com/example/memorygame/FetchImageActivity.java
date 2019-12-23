@@ -2,6 +2,7 @@ package com.example.memorygame;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -43,8 +44,11 @@ public class FetchImageActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test);
 
+        SharedPreferences sphighscore = getSharedPreferences(
+                "high_score", MODE_PRIVATE);
+        String playername = sphighscore.getString("newplayer","");
+        Log.d("PLAYERNAME", playername);
         stocksnap = this.getResources().getString(R.string.webUrl);
-
         String imagePath;
         for (int i = 1; i < imagePaths.length; i++) {
             imagePath = getFilesDir() + "/image" + i + ".jpg";

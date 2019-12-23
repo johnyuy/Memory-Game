@@ -1,26 +1,176 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
-    android:orientation="vertical"
-    tools:context=".MainActivity">
-    <Button
-        android:id="@+id/fetch"
-        android:layout_width="wrap_content"
+    tools:context=".FetchImageActivity">
+
+
+    <LinearLayout
+        android:id="@+id/grid"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="FETCH" />
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/playBtn"
+        app:layout_constraintTop_toTopOf="parent">
+        <LinearLayout style="@style/RowStyle">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight=".4"
+                android:gravity="right"
+                android:text="" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight=".3"
+                android:gravity="center"
+                android:text="NAME" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight=".4"
+                android:gravity="center"
+                android:text="HIGHSCORE" />
+        </LinearLayout>
+        <LinearLayout style="@style/RowStyle">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight=".4"
+                android:gravity="right"
+                android:text="1. " />
+            <TextView
+                android:id="@+id/hsname1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight=".3"
+                android:text="playername" />
+            <TextView
+                android:id="@+id/hscore1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight=".4"
+                android:text="XX" />
+        </LinearLayout>
+        <LinearLayout style="@style/RowStyle">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight=".4"
+                android:gravity="right"
+                android:text="2. " />
+            <TextView
+                android:id="@+id/hsname2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight=".3"
+                android:text="playername" />
+            <TextView
+                android:id="@+id/hscore2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight=".4"
+                android:text="XX" />
+        </LinearLayout>
+        <LinearLayout style="@style/RowStyle">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight=".4"
+                android:gravity="right"
+                android:text="3. " />
+            <TextView
+                android:id="@+id/hsname3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight=".3"
+                android:text="playername" />
+            <TextView
+                android:id="@+id/hscore3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight=".4"
+                android:text="XX" />
+        </LinearLayout>
+        <LinearLayout style="@style/RowStyle">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight=".4"
+                android:gravity="right"
+                android:text="4. " />
+            <TextView
+                android:id="@+id/hsname4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight=".3"
+                android:text="playername" />
+            <TextView
+                android:id="@+id/hscore4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight=".4"
+                android:text="XX" />
+        </LinearLayout>
+        <LinearLayout style="@style/RowStyle">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight=".4"
+                android:gravity="right"
+                android:text="5. " />
+            <TextView
+                android:id="@+id/hsname5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight=".3"
+                android:text="playername" />
+            <TextView
+                android:id="@+id/hscore5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight=".4"
+                android:text="XX" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/playername"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginBottom="108dp"
+        android:gravity="center"
+        android:text="new player"
+        android:textSize="25sp"
+        app:layout_constraintBottom_toTopOf="@+id/playBtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/game"
+        android:id="@+id/playBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="GAME" />
+        android:layout_marginBottom="92dp"
+        android:text="PLAY"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent" />
 
-    <Button
-        android:id="@+id/display"
+    <TextView
+        android:id="@+id/textView5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="DIAPLAY" />
-</LinearLayout>
+        android:text="Enter your name: "
+        app:layout_constraintBottom_toTopOf="@+id/playername"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/grid" />
+
+
+</android.support.constraint.ConstraintLayout>
