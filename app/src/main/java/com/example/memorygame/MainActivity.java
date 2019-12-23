@@ -6,9 +6,12 @@ import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -17,10 +20,10 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
 
-    Button fetch;
+
+
+    EditText playerName;
     Button game;
-    List<File> selectedImages = new ArrayList<File>();
-    List<ImageForSelection> fullImageReference = new ArrayList<ImageForSelection>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,134 +34,66 @@ public class MainActivity extends AppCompatActivity {
         // try initiating highscores
         SharedPreferences highscore = getSharedPreferences(
                 "high_score", MODE_PRIVATE);
-        SharedPreferences.Editor editor = highscore.edit();
+        final SharedPreferences.Editor editor = highscore.edit();
         for(int i = 1; i<7; i++) {
             editor.putString(Integer.toString(i), Integer.toString(i * 120));
+            String playertop = "TOP_" + i;
+            String playername = "Player " + i;
+            editor.putString(playertop, playername);
         }
         editor.commit();
 
+        initHighScore();
 
-
-
-
-        fetch = findViewById(R.id.fetch);
-        fetch.setOnClickListener(new View.OnClickListener() {
+        game = findViewById(R.id.playBtn);
+        game.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.d("HERER", "onclick");
+
+                SharedPreferences highscore = getSharedPreferences(
+                        "high_score", MODE_PRIVATE);
+                final SharedPreferences.Editor editor = highscore.edit();
+                playerName = (EditText) findViewById(R.id.playername);
+                String playerNameStr = playerName.getText().toString();
+                Log.d("ENTERNAME", playerNameStr);
+                editor.putString("newplayer", playerNameStr);
+                editor.commit();
+
+                Log.d("HERER", "intent");
+
                 Intent intent = new Intent(MainActivity.this, FetchImageActivity.class);
+                Log.d("HERER", "intent2");
+
                 startActivity(intent);
             }
         });
 
-        game = findViewById(R.id.game);
-        game.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, GameActivity.class);
-
-                for (int i = 1; i < 7; i++) {
-                    File file = new File(getFilesDir() + "/image" + i + ".jpg");
-                    String key = Integer.toString(i);
-                    intent.putExtra(key, file);
-                }
-                startActivity(intent);
-            }
-        });
-
-        game = findViewById(R.id.display);
-        game.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, DisplayActivity.class);
-                startActivity(intent);
-            }
-        });
     }
 
+    public void initHighScore(){
 
-    public class ImageForSelection {
-        private ImageView img;
-        private boolean isSelected = false;
+        // try initiating highscores
+        SharedPreferences sphighscore = getSharedPreferences(
+                "high_score", MODE_PRIVATE);
 
-        public ImageForSelection(ImageView img) {
-            this.img = img;
-            this.isSelected = false;
-        }
+        for(int i = 1; i<6; i++) {
 
-        public ImageView getImg() {
-            return img;
-        }
+            String resscore = "hscore" + Integer.toString(i);
+            int rescoreId = this.getResources().getIdentifier(resscore, "id", this.getPackageName());
+            TextView textViewhs = (TextView) findViewById(rescoreId);
+            String highscores = sphighscore.getString(Integer.toString(i), "");
+            textViewhs.setText(highscores);
 
-        public void setImg(ImageView img) {
-            this.img = img;
-        }
-
-        public boolean isSelected() {
-            return isSelected;
-        }
-
-        public void setSelected(boolean selected) {
-            isSelected = selected;
+            String resname = "hsname" + Integer.toString(i);
+            int resId = this.getResources().getIdentifier(resname, "id", this.getPackageName());
+            TextView textViewname = (TextView) findViewById(resId);
+            String playertop = "TOP_" + i;
+            String playername = sphighscore.getString(playertop, "");
+            textViewname.setText(playername);
         }
 
 
-    }
 
-    public void initGridReferences() {
-        for (int i = 1; i < 21; i++) {
-            String name = "f" + String.format("%02d", i);
-            int resourceId = this.getResources().getIdentifier(name, "id", this.getPackageName());
-            ImageView imageview = (ImageView) findViewById(resourceId);
-            ImageForSelection imageForSelection = new ImageForSelection(imageview);
-            fullImageReference.add(imageForSelection);
-
-        }
-    }
-
-
-    public void selectedImage(View v) {
-        ImageView selectedview = (ImageView) findViewById(v.getId());
-        String imgPath = this.getResources().getResourceName(v.getId());
-        int imageIndex = Integer.parseInt(imgPath.substring(imgPath.length() - 2));
-        int clickcount = 0;
-        for (int i = 0; i < fullImageReference.size(); i++) {
-            int truecounter = 0;
-            if (fullImageReference.get(i).isSelected) {
-                truecounter = truecounter + 1;
-                if (truecounter == 6) {
-                    int k = 0;
-                    for (int j = 0; j < fullImageReference.size(); j++) {
-
-                        if (fullImageReference.get(j).isSelected) {
-                            k = k + 1;
-                            File file = new File(getFilesDir() + "/image" + Integer.toString(k) + ".jpg");
-                            selectedImages.add(file);
-                            playGame();
-                        }
-
-                    }
-
-                }
-            }
-        }
-
-    }
-
-    public void playGame(){
-        Button btn = findViewById(R.id.playBtn);
-        if (btn.getVisibility() == View.INVISIBLE) {
-            btn.setVisibility(View.VISIBLE);
-        }
-        //set background alpha to 0.3f
-
-        if(btn != null){
-            btn.setOnClickListener(new View.OnClickListener(){
-                @Override
-                public void onClick(View v){
-                    Intent intent = new Intent(MainActivity.this, GameActivity.class);
-                    startActivity(intent);
-                }
-            });
-        }
     }
 }

@@ -2,8 +2,10 @@ package com.example.memorygame;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -23,6 +25,13 @@ public class FetchImageActivity extends AppCompatActivity
 
     private String[] imagePaths = new String[21];
     Button fetchBtn;
+
+
+    Button dogBtn;
+    Button catBtn;
+    Button bearBtn;
+    Button natureBtn;
+    Button beachBtn;
     Button playbtn;
     EditText htmlTxt;
     String stocksnap;
@@ -44,6 +53,10 @@ public class FetchImageActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test);
 
+        SharedPreferences sphighscore = getSharedPreferences(
+                "high_score", MODE_PRIVATE);
+        String playername = sphighscore.getString("newplayer","");
+        Log.d("PLAYERNAME", playername);
         stocksnap = this.getResources().getString(R.string.webUrl);
 
         String imagePath;
@@ -138,6 +151,201 @@ public class FetchImageActivity extends AppCompatActivity
                 fetchservice.execute(htmlcode);
             }
         });
+
+        dogBtn = findViewById(R.id.dog);
+        dogBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (bar.getVisibility() == View.INVISIBLE) {
+                    bar.setVisibility(View.VISIBLE);
+                }
+                //hide keyboard
+                try {
+                    InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                //stop async if active
+                if (fetchservice != null) {
+                    fetchservice.cancel(true);
+                    for (int k = 1; k < 21; k++) {
+                        String ImageViewStr = "img" + String.format("%02d", k);
+                        int ImagViewId = getResources().getIdentifier(ImageViewStr, "id", getPackageName());
+                        ImageView iv = findViewById(ImagViewId);
+                        iv.setImageResource(R.drawable.white);
+                    }
+                }
+                if (downloadTask != null)
+                    downloadTask.cancel(true);
+
+                String dog = "dog";
+
+                htmlcode = stocksnap + dog;
+
+                Log.d("HTML", htmlcode);
+                fetchservice = new AsyncHtmlSourcecode(FetchImageActivity.this);
+                fetchservice.execute(htmlcode);
+            }
+        });
+
+        bearBtn = findViewById(R.id.bear);
+        bearBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (bar.getVisibility() == View.INVISIBLE) {
+                    bar.setVisibility(View.VISIBLE);
+                }
+                //hide keyboard
+                try {
+                    InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                //stop async if active
+                if (fetchservice != null) {
+                    fetchservice.cancel(true);
+                    for (int k = 1; k < 21; k++) {
+                        String ImageViewStr = "img" + String.format("%02d", k);
+                        int ImagViewId = getResources().getIdentifier(ImageViewStr, "id", getPackageName());
+                        ImageView iv = findViewById(ImagViewId);
+                        iv.setImageResource(R.drawable.white);
+                    }
+                }
+                if (downloadTask != null)
+                    downloadTask.cancel(true);
+
+                String bear = "bear";
+
+                htmlcode = stocksnap + bear;
+
+                Log.d("HTML", htmlcode);
+                fetchservice = new AsyncHtmlSourcecode(FetchImageActivity.this);
+                fetchservice.execute(htmlcode);
+            }
+        });
+
+        catBtn = findViewById(R.id.cat);
+        catBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (bar.getVisibility() == View.INVISIBLE) {
+                    bar.setVisibility(View.VISIBLE);
+                }
+                //hide keyboard
+                try {
+                    InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                //stop async if active
+                if (fetchservice != null) {
+                    fetchservice.cancel(true);
+                    for (int k = 1; k < 21; k++) {
+                        String ImageViewStr = "img" + String.format("%02d", k);
+                        int ImagViewId = getResources().getIdentifier(ImageViewStr, "id", getPackageName());
+                        ImageView iv = findViewById(ImagViewId);
+                        iv.setImageResource(R.drawable.white);
+                    }
+                }
+                if (downloadTask != null)
+                    downloadTask.cancel(true);
+
+                String cat = "cat";
+
+                htmlcode = stocksnap +cat;
+
+                Log.d("HTML", htmlcode);
+                fetchservice = new AsyncHtmlSourcecode(FetchImageActivity.this);
+                fetchservice.execute(htmlcode);
+            }
+        });
+
+        natureBtn = findViewById(R.id.nature);
+        natureBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (bar.getVisibility() == View.INVISIBLE) {
+                    bar.setVisibility(View.VISIBLE);
+                }
+                //hide keyboard
+                try {
+                    InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                //stop async if active
+                if (fetchservice != null) {
+                    fetchservice.cancel(true);
+                    for (int k = 1; k < 21; k++) {
+                        String ImageViewStr = "img" + String.format("%02d", k);
+                        int ImagViewId = getResources().getIdentifier(ImageViewStr, "id", getPackageName());
+                        ImageView iv = findViewById(ImagViewId);
+                        iv.setImageResource(R.drawable.white);
+                    }
+                }
+                if (downloadTask != null)
+                    downloadTask.cancel(true);
+
+                String nature = "nature";
+
+                htmlcode = stocksnap +nature;
+
+                Log.d("HTML", htmlcode);
+                fetchservice = new AsyncHtmlSourcecode(FetchImageActivity.this);
+                fetchservice.execute(htmlcode);
+            }
+        });
+
+        beachBtn = findViewById(R.id.beach);
+        beachBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (bar.getVisibility() == View.INVISIBLE) {
+                    bar.setVisibility(View.VISIBLE);
+                }
+                //hide keyboard
+                try {
+                    InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                //stop async if active
+                if (fetchservice != null) {
+                    fetchservice.cancel(true);
+                    for (int k = 1; k < 21; k++) {
+                        String ImageViewStr = "img" + String.format("%02d", k);
+                        int ImagViewId = getResources().getIdentifier(ImageViewStr, "id", getPackageName());
+                        ImageView iv = findViewById(ImagViewId);
+                        iv.setImageResource(R.drawable.white);
+                    }
+                }
+                if (downloadTask != null)
+                    downloadTask.cancel(true);
+
+                String beach = "beach";
+
+                htmlcode = stocksnap +beach;
+
+                Log.d("HTML", htmlcode);
+                fetchservice = new AsyncHtmlSourcecode(FetchImageActivity.this);
+                fetchservice.execute(htmlcode);
+            }
+        });
+
+
+
+
+
     }
 
     /// CHOOSE IMAGES
@@ -172,7 +380,6 @@ public class FetchImageActivity extends AppCompatActivity
         ImageView selectedview = (ImageView) findViewById(v.getId());
         ImageForSelection selected = new ImageForSelection();
         int alreadyselected = 0;
-        playbtn.setEnabled(false);
 
         // selected number 6 cannot return
         for (ImageForSelection ifs : fullImageReference) {
@@ -191,14 +398,11 @@ public class FetchImageActivity extends AppCompatActivity
                 alreadyselected = alreadyselected + 1;
                 if (alreadyselected > 6) {
                     for (ImageForSelection ifschange : fullImageReference) {
-                        if (ifschange.getImg() == selectedview) {
-                            ifschange.setSelected(!ifs.isSelected);
+                        if (ifs.getImg() == selectedview) {
+                            ifs.setSelected(!ifs.isSelected);
                             selectedview.setAlpha(1.0f);
-//                            fetchBtn.setEnabled(false);
-                            playbtn.setEnabled(true);
                             return;
                         }
-//                        fetchBtn.setEnabled(false);
                     }
 
                 }
@@ -209,14 +413,34 @@ public class FetchImageActivity extends AppCompatActivity
         String imgPath = this.getResources().getResourceName(v.getId());
         int imageIndex = Integer.parseInt(imgPath.substring(imgPath.length() - 2));
         int selectednumber = 0;
-
         for (ImageForSelection ifs : fullImageReference) {
             if (ifs.isSelected) {
                 selectednumber = selectednumber + 1;
+
                 Log.d("INCREMENT?", Integer.toString(selectednumber));
                 if (selectednumber == 6) {
-                    Log.d("YAY ", "PLAY BUTTON WILL BE ENABLED");
-                    playbtn.setEnabled(true);
+                    Log.d("YAY ", "NEXT BUTTON WILL APPEAR");
+
+                    for (ImageForSelection si : fullImageReference) {
+                        if (si.isSelected) {
+                            Log.d("FILENAMEELVL1", si.getFilepath());
+                            selectedImages.add(si.getFilepath());
+                        }
+                    }
+
+                    Log.d("ImageForSelectionSIZE", Integer.toString(selectedImages.size()));
+
+                    Intent intent = new Intent(FetchImageActivity.this, GameActivity.class);
+                    int k = 1;
+                    for (String path : selectedImages) {
+                        Log.d("FILENAMEE", path);
+                        String key = Integer.toString(k);
+                        intent.putExtra(key, path);
+                        startActivity(intent);
+                        k++;
+                    }
+                    startActivity(intent);
+
                 }
             }
         }
