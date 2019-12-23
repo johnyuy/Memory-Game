@@ -3,6 +3,10 @@ package com.example.memorygame;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.ColorMatrix;
+import android.graphics.ColorMatrixColorFilter;
+import android.graphics.Matrix;
+import android.graphics.drawable.Drawable;
 import android.media.Image;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -14,6 +18,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
@@ -26,9 +31,10 @@ public class GameActivity extends AppCompatActivity {
     ImageView[] gameImages = new ImageView[5];
     List<GridImageView> gridImageList = null;
     GridImageView[] gridImages = new GridImageView[11];
-    int clickNumber = 1, selection1, selection2, gameScore = 0;
+    int clickNumber = 1, selection1, selection2, gameScore = 0, finalScore =0, gameLevel = 1;
     boolean result = false, start = false;
     CountUpTimer timer = null;
+    int markedTime =0;
     List<String> ifrestartimgs = new ArrayList<String>();
     ImageButton menuBtn;
     ImageButton restartBtn;
@@ -39,9 +45,8 @@ public class GameActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.game);
-
-        //restartBtn = findViewById(R.id.restart);
-        restartBtn=findViewById(R.id.restart);
+        Toast.makeText(getApplicationContext(),"LEVEL " + gameLevel, Toast.LENGTH_SHORT).show();
+        restartBtn = findViewById(R.id.restart);
         restartBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
@@ -87,11 +92,10 @@ public class GameActivity extends AppCompatActivity {
 
         initRandom(this.gridImageList);
 
+        //Answers log
         for (GridImageView img : gridImages) {
-            Log.d("GAME SYSTEM", "SEQUENCE imageCode = " + img.getImageCode());
+            Log.d("FLIPDOKU", "SEQUENCE imageCode = " + img.getImageCode());
         }
-        //initBlanks();
-        //initGrid();
 
 
     }
@@ -103,19 +107,20 @@ public class GameActivity extends AppCompatActivity {
         for (int i = 1; i <= 6; i++) {
             String imagepath = b.getString(Integer.toString(i));
             Bitmap bitmap = BitmapFactory.decodeFile(imagepath);
+
             ifrestartimgs.add(imagepath);
             Log.d("IMAGEPATH", imagepath);
             String imgId = "item" + i;
             int resourceId = this.getResources().getIdentifier(imgId, "drawable", this.getPackageName());
-            ImageView img = new ImageView(this);
 
+            ImageView img = new ImageView(this);
             img.setImageBitmap(bitmap);
 
             GridImageView gimg = new GridImageView(img, i);
             this.gridImageList.add(gimg);
         }
 
-        Log.d("GAME SYSTEM", "gameImageList Loaded");
+        Log.d("FLIPDOKU", "gameImageList Loaded");
 
     }
 
@@ -161,22 +166,37 @@ public class GameActivity extends AppCompatActivity {
 
         for (int i = 0; i < imgList.size(); i++) {
             ImageView img = this.gridImages[i].getImg();
-
-
             imgList.get(i).setImageDrawable(img.getDrawable());
         }
-        Log.d("GAME SYSTEM", "Imported images to grid");
+        Log.d("FLIPDOKU", "Imported images to grid");
     }
 
     private void initBlanks() {
-        for (int i = 0; i < gridImages.length; i++) {
-            //
+        for (int i = 1; i <= gridImages.length; i++) {
+            ImageView img = getGridImageView(i);
+            img.setImageResource(R.drawable.blank2);
         }
     }
 
+    private void initGrayscale(){
+        for(int i=0; i<gridImages.length;i++){
+            ImageView img = gridImages[i].getImg();
+            ColorMatrix matrix = new ColorMatrix();
+            matrix.setSaturation(0);
+            img.setColorFilter(new ColorMatrixColorFilter(matrix));
+        }
+    }
+
+    private  void initRotate(){
+        for(int i= 1; i<=gridImages.length; i++) {
+            ImageView imageView = getGridImageView(i);
+
+            imageView.setRotation(i*90);
+        }
+    }
 
     private void flipToShow(int gridIndex) {
-        Log.d("GAME SYSTEM", "CLICK NUMBER = " + clickNumber);
+        Log.d("FLIPDOKU", "CLICK NUMBER = " + clickNumber);
         flipIsUpStatus(gridIndex);
         //get layout image view id
         String imgId = "img" + String.format("%02d", gridIndex);
@@ -186,7 +206,7 @@ public class GameActivity extends AppCompatActivity {
         //find corresponding image
         ImageView img = gridImages[gridIndex - 1].getImg();
         gridView.setImageDrawable(img.getDrawable());
-        Log.d("GAME SYSTEM", "Flipped grid number " + gridIndex + " to show image");
+        Log.d("FLIPDOKU", "Flipped grid number " + gridIndex + " to show image");
 
         //check if the current selection is first click
         if (clickNumber == 1) {
@@ -200,7 +220,7 @@ public class GameActivity extends AppCompatActivity {
             clickNumber = 1;
             selection2 = gridIndex;
             result = compareSelections();
-            Log.d("GAME SYSTEM", "result = " + result);
+            Log.d("FLIPDOKU", "result = " + result);
             if (result) {
                 gridImages[selection1 - 1].setSolved(true);
                 gridImages[selection2 - 1].setSolved(true);
@@ -212,7 +232,7 @@ public class GameActivity extends AppCompatActivity {
 
         }
         printSolvedStatus();
-        Log.d("GAME SYSTEM", "Score = " + gameScore);
+        Log.d("FLIPDOKU", "Score = " + gameScore);
     }
 
     private void flipToHide(int gridIndex) {
@@ -220,8 +240,8 @@ public class GameActivity extends AppCompatActivity {
         flipIsUpStatus(gridIndex);
         //get layout image view id
         ImageView img = (ImageView) getGridImageView(gridIndex);
-        img.setImageResource(R.drawable.blank);
-        Log.d("GAME SYSTEM", "Flipped grid number " + gridIndex + " to hide image");
+        img.setImageResource(R.drawable.blank2);
+        Log.d("FLIPDOKU", "Flipped grid number " + gridIndex + " to hide image");
 
     }
 
@@ -231,7 +251,7 @@ public class GameActivity extends AppCompatActivity {
         } else {
             gridImages[gridIndex - 1].setUp(true);
         }
-        Log.d("GAME SYSTEM", "Grid " + gridIndex + " status = " + gridImages[gridIndex - 1].isUp());
+        Log.d("FLIPDOKU", "Grid " + gridIndex + " status = " + gridImages[gridIndex - 1].isUp());
     }
 
     private ImageView getGridImageView(int gridIndex) {
@@ -248,7 +268,7 @@ public class GameActivity extends AppCompatActivity {
         ImageView img = (ImageView) findViewById(view.getId());
         String name = this.getResources().getResourceName(img.getId());
         int gridIndex = Integer.parseInt(name.substring(name.length() - 2));
-        Log.d("GAME SYSTEM", "grid index " + gridIndex + " selected");
+        Log.d("FLIPDOKU", "grid index " + gridIndex + " selected");
 
         //flip
         if (!gridImages[gridIndex - 1].isUp()) {
@@ -274,7 +294,7 @@ public class GameActivity extends AppCompatActivity {
 
         int id1 = gridImages[selection1 - 1].getImageCode();
         int id2 = gridImages[selection2 - 1].getImageCode();
-        Log.d("GAME SYSTEM", "comparing grid " + selection1 + " and grid " + selection2);
+        Log.d("FLIPDOKU", "comparing grid " + selection1 + " and grid " + selection2);
         if (id1 == id2)
             return true;
         return false;
@@ -298,12 +318,12 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private void printSolvedStatus() {
-        Log.d("GAME SYSTEM", "Solved Statuses");
+        Log.d("FLIPDOKU", "Solved Statuses");
         for (int i = 0; i < gridImages.length; i++) {
             int j = i + 1;
-            Log.d("GAME SYSTEM", "Grid " + j + " = " + gridImages[i].isSolved());
+            Log.d("FLIPDOKU", "Grid " + j + " = " + gridImages[i].isSolved());
         }
-        Log.d("GAME SYSTEM", " ");
+        Log.d("FLIPDOKU", " ");
     }
 
     public abstract class CountUpTimer extends CountDownTimer {
@@ -333,6 +353,10 @@ public class GameActivity extends AppCompatActivity {
 
     public void updateScore() {
         int score = 0;
+        int elapsedTime = Integer.parseInt(timerView.getText().toString()) - markedTime;
+        Log.d("FLIPDUKO", String.format("Elapsed Time = " + timerView.getText().toString()));
+        markedTime = Integer.parseInt(timerView.getText().toString());
+
         for (int i = 0; i < gridImages.length; i++) {
             if (gridImages[i].isSolved()) {
                 score++;
@@ -342,9 +366,21 @@ public class GameActivity extends AppCompatActivity {
         TextView scoretext = (TextView) findViewById(R.id.scoreView);
         scoretext.setText("score : " + score + "/6");
         gameScore = score;
+
+
+
         if (gameScore == gameImages.length + 1) {
-            Log.d("GAME SYSTEM", "STOP " + gameScore);
-            timer.cancel();
+            Log.d("FLIPDOKU", "STOP LEVEL" + gameScore);
+            //
+            if(gameLevel<3){
+                finalScore += gameScore;
+                gameScore=0;
+                nextLevel();
+            } else {
+                timer.cancel();
+                //registerScore();
+                Toast.makeText(getApplicationContext(),"Well Done!", Toast.LENGTH_LONG).show();
+            }
         }
 
     }
@@ -359,6 +395,27 @@ public class GameActivity extends AppCompatActivity {
             };
             timer.start();
         }
+    }
 
+    public void nextLevel(){
+        gameLevel ++;
+
+        Toast.makeText(getApplicationContext(),"LEVEL " + gameLevel, Toast.LENGTH_SHORT).show();
+
+        for(int i = 0; i <gridImages.length; i++){
+            gridImages[i].setSolved(false);
+            gridImages[i].setUp(false);
+        }
+
+        initRandom(gridImageList);
+
+        if(gameLevel>1)
+            initGrayscale();
+
+        if(gameLevel>2)
+            initRotate();
+
+        initBlanks();
+        setAllEnabled(true);
     }
 }

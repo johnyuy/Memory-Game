@@ -25,11 +25,14 @@ public class FetchImageActivity extends AppCompatActivity
 
     private String[] imagePaths = new String[21];
     Button fetchBtn;
+
+
     Button dogBtn;
     Button catBtn;
     Button bearBtn;
     Button natureBtn;
     Button beachBtn;
+    Button playbtn;
     EditText htmlTxt;
     String stocksnap;
     String htmlcode;
@@ -55,6 +58,7 @@ public class FetchImageActivity extends AppCompatActivity
         String playername = sphighscore.getString("newplayer","");
         Log.d("PLAYERNAME", playername);
         stocksnap = this.getResources().getString(R.string.webUrl);
+
         String imagePath;
         for (int i = 1; i < imagePaths.length; i++) {
             imagePath = getFilesDir() + "/image" + i + ".jpg";
@@ -78,6 +82,33 @@ public class FetchImageActivity extends AppCompatActivity
         pb01 = findViewById(R.id.pb01);
 
         initGridReferences();
+        playbtn = (Button)findViewById(R.id.playBtn);
+        playbtn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+
+
+                for (ImageForSelection si : fullImageReference) {
+                    if (si.isSelected) {
+                        Log.d("FILENAMELVL1", si.getFilepath());
+                        selectedImages.add(si.getFilepath());
+                    }
+                }
+                Log.d("ImageForSelectionSIZE", Integer.toString(selectedImages.size()));
+
+
+                Intent intent = new Intent(FetchImageActivity.this, GameActivity.class);
+                int k = 1;
+                for (String path : selectedImages) {
+                    Log.d("FILENAME", path);
+                    String key = Integer.toString(k);
+                    intent.putExtra(key, path);
+                    startActivity(intent);
+                    k++;
+                }
+            }
+        });
+
         fetchBtn = findViewById(R.id.fetch);
         fetchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,6 +116,10 @@ public class FetchImageActivity extends AppCompatActivity
                 if (bar.getVisibility() == View.INVISIBLE) {
                     bar.setVisibility(View.VISIBLE);
                 }
+
+                fullImageReference = new ArrayList<ImageForSelection>();
+                initGridReferences();
+
                 //hide keyboard
                 try {
                     InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -100,6 +135,7 @@ public class FetchImageActivity extends AppCompatActivity
                         String ImageViewStr = "img" + String.format("%02d", k);
                         int ImagViewId = getResources().getIdentifier(ImageViewStr, "id", getPackageName());
                         ImageView iv = findViewById(ImagViewId);
+                        iv.setAlpha(1.0f);
                         iv.setImageResource(R.drawable.white);
                     }
                 }
@@ -145,6 +181,8 @@ public class FetchImageActivity extends AppCompatActivity
                     downloadTask.cancel(true);
 
                 String dog = "dog";
+                htmlTxt = (EditText) findViewById(R.id.htmlurl);
+                htmlTxt.setText(dog);
 
                 htmlcode = stocksnap + dog;
 
@@ -183,6 +221,8 @@ public class FetchImageActivity extends AppCompatActivity
                     downloadTask.cancel(true);
 
                 String bear = "bear";
+                htmlTxt = (EditText) findViewById(R.id.htmlurl);
+                htmlTxt.setText(bear);
 
                 htmlcode = stocksnap + bear;
 
@@ -221,6 +261,8 @@ public class FetchImageActivity extends AppCompatActivity
                     downloadTask.cancel(true);
 
                 String cat = "cat";
+                htmlTxt = (EditText) findViewById(R.id.htmlurl);
+                htmlTxt.setText(cat);
 
                 htmlcode = stocksnap +cat;
 
@@ -259,6 +301,8 @@ public class FetchImageActivity extends AppCompatActivity
                     downloadTask.cancel(true);
 
                 String nature = "nature";
+                htmlTxt = (EditText) findViewById(R.id.htmlurl);
+                htmlTxt.setText(nature);
 
                 htmlcode = stocksnap +nature;
 
@@ -297,6 +341,8 @@ public class FetchImageActivity extends AppCompatActivity
                     downloadTask.cancel(true);
 
                 String beach = "beach";
+                htmlTxt = (EditText) findViewById(R.id.htmlurl);
+                htmlTxt.setText(beach);
 
                 htmlcode = stocksnap +beach;
 
@@ -344,6 +390,7 @@ public class FetchImageActivity extends AppCompatActivity
         ImageView selectedview = (ImageView) findViewById(v.getId());
         ImageForSelection selected = new ImageForSelection();
         int alreadyselected = 0;
+        playbtn.setEnabled(false);
 
         // selected number 6 cannot return
         for (ImageForSelection ifs : fullImageReference) {
@@ -362,8 +409,8 @@ public class FetchImageActivity extends AppCompatActivity
                 alreadyselected = alreadyselected + 1;
                 if (alreadyselected > 6) {
                     for (ImageForSelection ifschange : fullImageReference) {
-                        if (ifs.getImg() == selectedview) {
-                            ifs.setSelected(!ifs.isSelected);
+                        if (ifschange.getImg() == selectedview) {
+                            ifschange.setSelected(!ifschange.isSelected);
                             selectedview.setAlpha(1.0f);
                             return;
                         }
@@ -384,26 +431,29 @@ public class FetchImageActivity extends AppCompatActivity
                 Log.d("INCREMENT?", Integer.toString(selectednumber));
                 if (selectednumber == 6) {
                     Log.d("YAY ", "NEXT BUTTON WILL APPEAR");
+                    playbtn.setEnabled(true);
 
-                    for (ImageForSelection si : fullImageReference) {
-                        if (si.isSelected) {
-                            Log.d("FILENAMEELVL1", si.getFilepath());
-                            selectedImages.add(si.getFilepath());
-                        }
-                    }
 
-                    Log.d("ImageForSelectionSIZE", Integer.toString(selectedImages.size()));
 
-                    Intent intent = new Intent(FetchImageActivity.this, GameActivity.class);
-                    int k = 1;
-                    for (String path : selectedImages) {
-                        Log.d("FILENAMEE", path);
-                        String key = Integer.toString(k);
-                        intent.putExtra(key, path);
-                        startActivity(intent);
-                        k++;
-                    }
-                    startActivity(intent);
+//                    for (ImageForSelection si : fullImageReference) {
+//                        if (si.isSelected) {
+//                            Log.d("FILENAMEELVL1", si.getFilepath());
+//                            selectedImages.add(si.getFilepath());
+//                        }
+//                    }
+//
+//                    Log.d("ImageForSelectionSIZE", Integer.toString(selectedImages.size()));
+//
+//                    Intent intent = new Intent(FetchImageActivity.this, GameActivity.class);
+//                    int k = 1;
+//                    for (String path : selectedImages) {
+//                        Log.d("FILENAMEE", path);
+//                        String key = Integer.toString(k);
+//                        intent.putExtra(key, path);
+//                        startActivity(intent);
+//                        k++;
+//                    }
+//                    startActivity(intent);
 
                 }
             }

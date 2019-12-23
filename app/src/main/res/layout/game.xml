@@ -52,17 +52,17 @@
             <ImageView
                 android:id="@+id/img01"
                 style="@style/ImageStyle"
-                android:src="@drawable/blank" />
+                android:src="@drawable/blank2" />
 
             <ImageView
                 android:id="@+id/img02"
                 style="@style/ImageStyle"
-                android:src="@drawable/blank" />
+                android:src="@drawable/blank2" />
 
             <ImageView
                 android:id="@+id/img03"
                 style="@style/ImageStyle"
-                android:src="@drawable/blank" />
+                android:src="@drawable/blank2" />
         </LinearLayout>
 
         <LinearLayout style="@style/RowStyle">
@@ -70,17 +70,17 @@
             <ImageView
                 android:id="@+id/img04"
                 style="@style/ImageStyle"
-                android:src="@drawable/blank" />
+                android:src="@drawable/blank2" />
 
             <ImageView
                 android:id="@+id/img05"
                 style="@style/ImageStyle"
-                android:src="@drawable/blank" />
+                android:src="@drawable/blank2" />
 
             <ImageView
                 android:id="@+id/img06"
                 style="@style/ImageStyle"
-                android:src="@drawable/blank" />
+                android:src="@drawable/blank2" />
         </LinearLayout>
 
         <LinearLayout style="@style/RowStyle">
@@ -88,17 +88,17 @@
             <ImageView
                 android:id="@+id/img07"
                 style="@style/ImageStyle"
-                android:src="@drawable/blank" />
+                android:src="@drawable/blank2" />
 
             <ImageView
                 android:id="@+id/img08"
                 style="@style/ImageStyle"
-                android:src="@drawable/blank" />
+                android:src="@drawable/blank2" />
 
             <ImageView
                 android:id="@+id/img09"
                 style="@style/ImageStyle"
-                android:src="@drawable/blank" />
+                android:src="@drawable/blank2" />
         </LinearLayout>
 
         <LinearLayout style="@style/RowStyle">
@@ -106,17 +106,17 @@
             <ImageView
                 android:id="@+id/img10"
                 style="@style/ImageStyle"
-                android:src="@drawable/blank" />
+                android:src="@drawable/blank2" />
 
             <ImageView
                 android:id="@+id/img11"
                 style="@style/ImageStyle"
-                android:src="@drawable/blank" />
+                android:src="@drawable/blank2" />
 
             <ImageView
                 android:id="@+id/img12"
                 style="@style/ImageStyle"
-                android:src="@drawable/blank" />
+                android:src="@drawable/blank2" />
 
         </LinearLayout>
 
