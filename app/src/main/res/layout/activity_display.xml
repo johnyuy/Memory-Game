@@ -32,10 +32,16 @@
 
         android:orientation="vertical" >
         <LinearLayout style="@style/RowStyle">
-            <ImageView style="@style/ImageStyle" android:id="@+id/img1" android:src="@drawable/blank"/>
+
+            <ImageView
+                android:id="@+id/img1"
+                style="@style/ImageStyle"
+                android:src="@drawable/blank" />
+
             <ImageView style="@style/ImageStyle" android:id="@+id/img2" android:src="@drawable/blank"/>
             <ImageView style="@style/ImageStyle" android:id="@+id/img3" android:src="@drawable/blank"/>
             <ImageView style="@style/ImageStyle" android:id="@+id/img4" android:src="@drawable/blank"/>
+
         </LinearLayout>
         <LinearLayout style="@style/RowStyle">
             <ImageView style="@style/ImageStyle" android:id="@+id/img5" android:src="@drawable/blank"/>

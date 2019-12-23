@@ -27,7 +27,7 @@ public class FetchImageActivity extends AppCompatActivity
     private String[] imagePaths = new String[21];
     Button fetchBtn;
     EditText htmlTxt;
-
+    final String stocksnap = this.getResources().getString(R.string.webUrl);
     String htmlcode;
     String error;
     ProgressBar bar = null;
@@ -101,7 +101,8 @@ public class FetchImageActivity extends AppCompatActivity
                 htmlTxt = (EditText) findViewById(R.id.htmlurl);
 
 
-                htmlcode = htmlTxt.getText().toString();
+                htmlcode = "https://stocksnap.io/search/" + htmlTxt.getText().toString();
+
                 if (!URLUtil.isValidUrl(htmlcode)) {
                     error = "Please enter valid URL";
                     Toast.makeText(FetchImageActivity.this, error,
