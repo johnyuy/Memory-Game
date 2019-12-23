@@ -23,6 +23,7 @@ public class FetchImageActivity extends AppCompatActivity
 
     private String[] imagePaths = new String[21];
     Button fetchBtn;
+    Button playbtn;
     EditText htmlTxt;
     String stocksnap;
     String htmlcode;
@@ -68,6 +69,33 @@ public class FetchImageActivity extends AppCompatActivity
         pb01 = findViewById(R.id.pb01);
 
         initGridReferences();
+        playbtn = (Button)findViewById(R.id.playBtn);
+        playbtn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+
+
+                for (ImageForSelection si : fullImageReference) {
+                    if (si.isSelected) {
+                        Log.d("FILENAMELVL1", si.getFilepath());
+                        selectedImages.add(si.getFilepath());
+                    }
+                }
+                Log.d("ImageForSelectionSIZE", Integer.toString(selectedImages.size()));
+
+
+                Intent intent = new Intent(FetchImageActivity.this, GameActivity.class);
+                int k = 1;
+                for (String path : selectedImages) {
+                    Log.d("FILENAME", path);
+                    String key = Integer.toString(k);
+                    intent.putExtra(key, path);
+                    startActivity(intent);
+                    k++;
+                }
+            }
+        });
+
         fetchBtn = findViewById(R.id.fetch);
         fetchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,6 +103,10 @@ public class FetchImageActivity extends AppCompatActivity
                 if (bar.getVisibility() == View.INVISIBLE) {
                     bar.setVisibility(View.VISIBLE);
                 }
+
+                fullImageReference = new ArrayList<ImageForSelection>();
+                initGridReferences();
+
                 //hide keyboard
                 try {
                     InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -90,6 +122,7 @@ public class FetchImageActivity extends AppCompatActivity
                         String ImageViewStr = "img" + String.format("%02d", k);
                         int ImagViewId = getResources().getIdentifier(ImageViewStr, "id", getPackageName());
                         ImageView iv = findViewById(ImagViewId);
+                        iv.setAlpha(1.0f);
                         iv.setImageResource(R.drawable.white);
                     }
                 }
@@ -139,6 +172,7 @@ public class FetchImageActivity extends AppCompatActivity
         ImageView selectedview = (ImageView) findViewById(v.getId());
         ImageForSelection selected = new ImageForSelection();
         int alreadyselected = 0;
+        playbtn.setEnabled(false);
 
         // selected number 6 cannot return
         for (ImageForSelection ifs : fullImageReference) {
@@ -157,11 +191,14 @@ public class FetchImageActivity extends AppCompatActivity
                 alreadyselected = alreadyselected + 1;
                 if (alreadyselected > 6) {
                     for (ImageForSelection ifschange : fullImageReference) {
-                        if (ifs.getImg() == selectedview) {
-                            ifs.setSelected(!ifs.isSelected);
+                        if (ifschange.getImg() == selectedview) {
+                            ifschange.setSelected(!ifs.isSelected);
                             selectedview.setAlpha(1.0f);
+//                            fetchBtn.setEnabled(false);
+                            playbtn.setEnabled(true);
                             return;
                         }
+//                        fetchBtn.setEnabled(false);
                     }
 
                 }
@@ -172,34 +209,14 @@ public class FetchImageActivity extends AppCompatActivity
         String imgPath = this.getResources().getResourceName(v.getId());
         int imageIndex = Integer.parseInt(imgPath.substring(imgPath.length() - 2));
         int selectednumber = 0;
+
         for (ImageForSelection ifs : fullImageReference) {
             if (ifs.isSelected) {
                 selectednumber = selectednumber + 1;
-
                 Log.d("INCREMENT?", Integer.toString(selectednumber));
                 if (selectednumber == 6) {
-                    Log.d("YAY ", "NEXT BUTTON WILL APPEAR");
-
-                    for (ImageForSelection si : fullImageReference) {
-                        if (si.isSelected) {
-                            Log.d("FILENAMEELVL1", si.getFilepath());
-                            selectedImages.add(si.getFilepath());
-                        }
-                    }
-
-                    Log.d("ImageForSelectionSIZE", Integer.toString(selectedImages.size()));
-
-                    Intent intent = new Intent(FetchImageActivity.this, GameActivity.class);
-                    int k = 1;
-                    for (String path : selectedImages) {
-                        Log.d("FILENAMEE", path);
-                        String key = Integer.toString(k);
-                        intent.putExtra(key, path);
-                        startActivity(intent);
-                        k++;
-                    }
-                    startActivity(intent);
-
+                    Log.d("YAY ", "PLAY BUTTON WILL BE ENABLED");
+                    playbtn.setEnabled(true);
                 }
             }
         }

@@ -49,6 +49,7 @@
         android:layout_weight="1"
         android:text="@string/playBtn"
         android:visibility="visible"
+        android:enabled="false"
         app:layout_constraintEnd_toEndOf="@+id/grid"
         app:layout_constraintTop_toTopOf="parent" />
 
