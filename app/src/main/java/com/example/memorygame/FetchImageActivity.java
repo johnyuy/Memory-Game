@@ -41,7 +41,7 @@ public class FetchImageActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_fetchimages);
+        setContentView(R.layout.activity_test);
 
         stocksnap = this.getResources().getString(R.string.webUrl);
 
