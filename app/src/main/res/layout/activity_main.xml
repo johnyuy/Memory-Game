@@ -4,135 +4,131 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#E2030303"
     tools:context=".FetchImageActivity">
 
 
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="268dp"
+        android:layout_height="168dp"
+        app:layout_constraintBottom_toTopOf="@+id/grid"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.725"
+        app:srcCompat="@drawable/flipdokuHeader"
+        android:contentDescription="TODO" />
+
     <LinearLayout
         android:id="@+id/grid"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="282dp"
+        android:layout_height="179dp"
         android:gravity="center"
         android:orientation="vertical"
         app:layout_constraintBottom_toTopOf="@+id/playBtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
+
         <LinearLayout style="@style/RowStyle">
+
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight=".4"
-                android:gravity="right"
+                style="@style/sbRank"
                 android:text="" />
+
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight=".3"
-                android:gravity="center"
+                style="@style/sbName"
                 android:text="NAME" />
+
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight=".4"
-                android:gravity="center"
+                style="@style/sbScore"
                 android:text="HIGHSCORE" />
         </LinearLayout>
+
         <LinearLayout style="@style/RowStyle">
+
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight=".4"
-                android:gravity="right"
+                style="@style/sbRank"
                 android:text="1. " />
+
             <TextView
                 android:id="@+id/hsname1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight=".3"
+                style="@style/sbName"
                 android:text="playername" />
+
             <TextView
                 android:id="@+id/hscore1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight=".4"
+                style="@style/sbScore"
                 android:text="XX" />
         </LinearLayout>
+
         <LinearLayout style="@style/RowStyle">
+
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight=".4"
-                android:gravity="right"
+                style="@style/sbRank"
                 android:text="2. " />
+
             <TextView
                 android:id="@+id/hsname2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight=".3"
+                style="@style/sbName"
                 android:text="playername" />
+
             <TextView
                 android:id="@+id/hscore2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight=".4"
+                style="@style/sbScore"
                 android:text="XX" />
         </LinearLayout>
+
         <LinearLayout style="@style/RowStyle">
+
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight=".4"
-                android:gravity="right"
+                style="@style/sbRank"
                 android:text="3. " />
+
             <TextView
                 android:id="@+id/hsname3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight=".3"
+                style="@style/sbName"
                 android:text="playername" />
+
             <TextView
                 android:id="@+id/hscore3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight=".4"
+                style="@style/sbScore"
                 android:text="XX" />
         </LinearLayout>
+
         <LinearLayout style="@style/RowStyle">
+
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight=".4"
-                android:gravity="right"
+                style="@style/sbRank"
                 android:text="4. " />
+
             <TextView
                 android:id="@+id/hsname4"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight=".3"
+                style="@style/sbName"
                 android:text="playername" />
+
             <TextView
                 android:id="@+id/hscore4"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight=".4"
+                style="@style/sbScore"
                 android:text="XX" />
         </LinearLayout>
+
         <LinearLayout style="@style/RowStyle">
+
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight=".4"
-                android:gravity="right"
+                style="@style/sbRank"
                 android:text="5. " />
+
             <TextView
                 android:id="@+id/hsname5"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight=".3"
+                style="@style/sbName"
                 android:text="playername" />
+
             <TextView
                 android:id="@+id/hscore5"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight=".4"
+                style="@style/sbScore"
                 android:text="XX" />
         </LinearLayout>
 
@@ -140,37 +136,45 @@
 
     <EditText
         android:id="@+id/playername"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_marginBottom="108dp"
+        android:layout_width="0dp"
+        android:layout_height="54dp"
+        android:layout_marginBottom="52dp"
+        android:fontFamily="serif-monospace"
         android:gravity="center"
         android:text="new player"
+        android:textColor="#BFFFFEFE"
         android:textSize="25sp"
         app:layout_constraintBottom_toTopOf="@+id/playBtn"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/playBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="92dp"
+        android:layout_width="95dp"
+        android:layout_height="52dp"
         android:text="PLAY"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.864" />
 
     <TextView
         android:id="@+id/textView5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="26dp"
+        android:fontFamily="serif-monospace"
         android:text="Enter your name: "
+        android:textAlignment="center"
+        android:textColor="#BEFFFFFF"
+        android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/playername"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/grid" />
+        app:layout_constraintTop_toBottomOf="@+id/grid"
+        app:layout_constraintVertical_bias="0.805" />
 
 
 </android.support.constraint.ConstraintLayout>
