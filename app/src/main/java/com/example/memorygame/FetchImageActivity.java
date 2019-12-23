@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -24,6 +25,11 @@ public class FetchImageActivity extends AppCompatActivity
 
     private String[] imagePaths = new String[21];
     Button fetchBtn;
+    Button dogBtn;
+    Button catBtn;
+    Button bearBtn;
+    Button natureBtn;
+    Button beachBtn;
     EditText htmlTxt;
     String stocksnap;
     String htmlcode;
@@ -109,6 +115,201 @@ public class FetchImageActivity extends AppCompatActivity
                 fetchservice.execute(htmlcode);
             }
         });
+
+        dogBtn = findViewById(R.id.dog);
+        dogBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (bar.getVisibility() == View.INVISIBLE) {
+                    bar.setVisibility(View.VISIBLE);
+                }
+                //hide keyboard
+                try {
+                    InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                //stop async if active
+                if (fetchservice != null) {
+                    fetchservice.cancel(true);
+                    for (int k = 1; k < 21; k++) {
+                        String ImageViewStr = "img" + String.format("%02d", k);
+                        int ImagViewId = getResources().getIdentifier(ImageViewStr, "id", getPackageName());
+                        ImageView iv = findViewById(ImagViewId);
+                        iv.setImageResource(R.drawable.white);
+                    }
+                }
+                if (downloadTask != null)
+                    downloadTask.cancel(true);
+
+                String dog = "dog";
+
+                htmlcode = stocksnap + dog;
+
+                Log.d("HTML", htmlcode);
+                fetchservice = new AsyncHtmlSourcecode(FetchImageActivity.this);
+                fetchservice.execute(htmlcode);
+            }
+        });
+
+        bearBtn = findViewById(R.id.bear);
+        bearBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (bar.getVisibility() == View.INVISIBLE) {
+                    bar.setVisibility(View.VISIBLE);
+                }
+                //hide keyboard
+                try {
+                    InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                //stop async if active
+                if (fetchservice != null) {
+                    fetchservice.cancel(true);
+                    for (int k = 1; k < 21; k++) {
+                        String ImageViewStr = "img" + String.format("%02d", k);
+                        int ImagViewId = getResources().getIdentifier(ImageViewStr, "id", getPackageName());
+                        ImageView iv = findViewById(ImagViewId);
+                        iv.setImageResource(R.drawable.white);
+                    }
+                }
+                if (downloadTask != null)
+                    downloadTask.cancel(true);
+
+                String bear = "bear";
+
+                htmlcode = stocksnap + bear;
+
+                Log.d("HTML", htmlcode);
+                fetchservice = new AsyncHtmlSourcecode(FetchImageActivity.this);
+                fetchservice.execute(htmlcode);
+            }
+        });
+
+        catBtn = findViewById(R.id.cat);
+        catBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (bar.getVisibility() == View.INVISIBLE) {
+                    bar.setVisibility(View.VISIBLE);
+                }
+                //hide keyboard
+                try {
+                    InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                //stop async if active
+                if (fetchservice != null) {
+                    fetchservice.cancel(true);
+                    for (int k = 1; k < 21; k++) {
+                        String ImageViewStr = "img" + String.format("%02d", k);
+                        int ImagViewId = getResources().getIdentifier(ImageViewStr, "id", getPackageName());
+                        ImageView iv = findViewById(ImagViewId);
+                        iv.setImageResource(R.drawable.white);
+                    }
+                }
+                if (downloadTask != null)
+                    downloadTask.cancel(true);
+
+                String cat = "cat";
+
+                htmlcode = stocksnap +cat;
+
+                Log.d("HTML", htmlcode);
+                fetchservice = new AsyncHtmlSourcecode(FetchImageActivity.this);
+                fetchservice.execute(htmlcode);
+            }
+        });
+
+        natureBtn = findViewById(R.id.nature);
+        natureBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (bar.getVisibility() == View.INVISIBLE) {
+                    bar.setVisibility(View.VISIBLE);
+                }
+                //hide keyboard
+                try {
+                    InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                //stop async if active
+                if (fetchservice != null) {
+                    fetchservice.cancel(true);
+                    for (int k = 1; k < 21; k++) {
+                        String ImageViewStr = "img" + String.format("%02d", k);
+                        int ImagViewId = getResources().getIdentifier(ImageViewStr, "id", getPackageName());
+                        ImageView iv = findViewById(ImagViewId);
+                        iv.setImageResource(R.drawable.white);
+                    }
+                }
+                if (downloadTask != null)
+                    downloadTask.cancel(true);
+
+                String nature = "nature";
+
+                htmlcode = stocksnap +nature;
+
+                Log.d("HTML", htmlcode);
+                fetchservice = new AsyncHtmlSourcecode(FetchImageActivity.this);
+                fetchservice.execute(htmlcode);
+            }
+        });
+
+        beachBtn = findViewById(R.id.beach);
+        beachBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (bar.getVisibility() == View.INVISIBLE) {
+                    bar.setVisibility(View.VISIBLE);
+                }
+                //hide keyboard
+                try {
+                    InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                //stop async if active
+                if (fetchservice != null) {
+                    fetchservice.cancel(true);
+                    for (int k = 1; k < 21; k++) {
+                        String ImageViewStr = "img" + String.format("%02d", k);
+                        int ImagViewId = getResources().getIdentifier(ImageViewStr, "id", getPackageName());
+                        ImageView iv = findViewById(ImagViewId);
+                        iv.setImageResource(R.drawable.white);
+                    }
+                }
+                if (downloadTask != null)
+                    downloadTask.cancel(true);
+
+                String beach = "beach";
+
+                htmlcode = stocksnap +beach;
+
+                Log.d("HTML", htmlcode);
+                fetchservice = new AsyncHtmlSourcecode(FetchImageActivity.this);
+                fetchservice.execute(htmlcode);
+            }
+        });
+
+
+
+
+
     }
 
     /// CHOOSE IMAGES

@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -29,9 +30,9 @@ public class GameActivity extends AppCompatActivity {
     boolean result = false, start = false;
     CountUpTimer timer = null;
     List<String> ifrestartimgs = new ArrayList<String>();
-    Button menuBtn;
-    Button restartBtn;
-    Button backBtn;
+    ImageButton menuBtn;
+    ImageButton restartBtn;
+    ImageButton backBtn;
 
 
     @Override
@@ -39,7 +40,8 @@ public class GameActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.game);
 
-        restartBtn = findViewById(R.id.restart);
+        //restartBtn = findViewById(R.id.restart);
+        restartBtn=findViewById(R.id.restart);
         restartBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
