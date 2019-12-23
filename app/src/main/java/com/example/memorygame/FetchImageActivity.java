@@ -145,6 +145,8 @@ public class FetchImageActivity extends AppCompatActivity
                     downloadTask.cancel(true);
 
                 String dog = "dog";
+                htmlTxt = (EditText) findViewById(R.id.htmlurl);
+                htmlTxt.setText(dog);
 
                 htmlcode = stocksnap + dog;
 
@@ -183,6 +185,8 @@ public class FetchImageActivity extends AppCompatActivity
                     downloadTask.cancel(true);
 
                 String bear = "bear";
+                htmlTxt = (EditText) findViewById(R.id.htmlurl);
+                htmlTxt.setText(bear);
 
                 htmlcode = stocksnap + bear;
 
@@ -221,6 +225,8 @@ public class FetchImageActivity extends AppCompatActivity
                     downloadTask.cancel(true);
 
                 String cat = "cat";
+                htmlTxt = (EditText) findViewById(R.id.htmlurl);
+                htmlTxt.setText(cat);
 
                 htmlcode = stocksnap +cat;
 
@@ -259,6 +265,8 @@ public class FetchImageActivity extends AppCompatActivity
                     downloadTask.cancel(true);
 
                 String nature = "nature";
+                htmlTxt = (EditText) findViewById(R.id.htmlurl);
+                htmlTxt.setText(nature);
 
                 htmlcode = stocksnap +nature;
 
@@ -297,6 +305,8 @@ public class FetchImageActivity extends AppCompatActivity
                     downloadTask.cancel(true);
 
                 String beach = "beach";
+                htmlTxt = (EditText) findViewById(R.id.htmlurl);
+                htmlTxt.setText(beach);
 
                 htmlcode = stocksnap +beach;
 
