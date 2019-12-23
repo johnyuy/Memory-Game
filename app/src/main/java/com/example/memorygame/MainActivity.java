@@ -87,6 +87,8 @@ public class MainActivity extends AppCompatActivity {
         public void setSelected(boolean selected) {
             isSelected = selected;
         }
+
+
     }
 
     public void initGridReferences() {
@@ -118,8 +120,7 @@ public class MainActivity extends AppCompatActivity {
                             k = k + 1;
                             File file = new File(getFilesDir() + "/image" + Integer.toString(k) + ".jpg");
                             selectedImages.add(file);
-                            Intent intent = new Intent(MainActivity.this, GameActivity.class);
-                            startActivity(intent);
+                            playGame();
                         }
 
                     }
@@ -128,5 +129,23 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
+    }
+
+    public void playGame(){
+        Button btn = findViewById(R.id.playBtn);
+        if (btn.getVisibility() == View.INVISIBLE) {
+            btn.setVisibility(View.VISIBLE);
+        }
+        //set background alpha to 0.3f
+
+        if(btn != null){
+            btn.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View v){
+                    Intent intent = new Intent(MainActivity.this, GameActivity.class);
+                    startActivity(intent);
+                }
+            });
+        }
     }
 }

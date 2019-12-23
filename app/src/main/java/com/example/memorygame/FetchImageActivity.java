@@ -5,17 +5,14 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.support.annotation.IntegerRes;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
-import android.webkit.URLUtil;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -27,7 +24,7 @@ public class FetchImageActivity extends AppCompatActivity
     private String[] imagePaths = new String[21];
     Button fetchBtn;
     EditText htmlTxt;
-    final String stocksnap = this.getResources().getString(R.string.webUrl);
+    String stocksnap;
     String htmlcode;
     String error;
     ProgressBar bar = null;
@@ -44,7 +41,9 @@ public class FetchImageActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_test);
+        setContentView(R.layout.activity_fetchimages);
+
+        stocksnap = this.getResources().getString(R.string.webUrl);
 
         String imagePath;
         for (int i = 1; i < imagePaths.length; i++) {
@@ -100,14 +99,7 @@ public class FetchImageActivity extends AppCompatActivity
 
                 htmlTxt = (EditText) findViewById(R.id.htmlurl);
 
-
-                htmlcode = "https://stocksnap.io/search/" + htmlTxt.getText().toString();
-
-                if (!URLUtil.isValidUrl(htmlcode)) {
-                    error = "Please enter valid URL";
-                    Toast.makeText(FetchImageActivity.this, error,
-                            Toast.LENGTH_LONG).show();
-                }
+                htmlcode = stocksnap + htmlTxt.getText().toString();
 
                 Log.d("HTML", htmlcode);
                 fetchservice = new AsyncHtmlSourcecode(FetchImageActivity.this);
