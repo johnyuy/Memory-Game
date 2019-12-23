@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#E2030303"
+    android:background="#E8030303"
     tools:context=".FetchImageActivity">
 
 
@@ -12,14 +12,14 @@
         android:id="@+id/imageView"
         android:layout_width="268dp"
         android:layout_height="168dp"
+        android:contentDescription="TODO"
         app:layout_constraintBottom_toTopOf="@+id/grid"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.725"
-        app:srcCompat="@drawable/flipdokuHeader"
-        android:contentDescription="TODO" />
+        app:srcCompat="@drawable/flipdokuheader" />
 
     <LinearLayout
         android:id="@+id/grid"
