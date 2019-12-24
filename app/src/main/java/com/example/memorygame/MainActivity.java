@@ -81,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
         final SharedPreferences.Editor editor = highscore.edit();
         for (int i = 1; i < 6; i++) {
             String highscorekey = "HIGHSCORE_" + i;
-            editor.putString(highscorekey, Integer.toString(i * 6));
+            editor.putString(highscorekey, Integer.toString(0));
             String namekey = "NAME_" + i;
             String playername = "Player " + i;
             editor.putString(namekey, playername);

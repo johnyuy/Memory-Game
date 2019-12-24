@@ -73,7 +73,7 @@ public class FetchImageActivity extends AppCompatActivity
             if (b.getString("from").equals("game")) {
                 //DISPLAY PREVIOUS SEARCH
                 fromGameReload();
-
+                setAllEnabled(false);
             }
         }
 
