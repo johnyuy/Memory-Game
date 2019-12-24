@@ -53,6 +53,7 @@ public class FetchImageActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test);
 
+        setAllEnabled(false);
         SharedPreferences sphighscore = getSharedPreferences(
                 "high_score", MODE_PRIVATE);
         String playername = sphighscore.getString("newplayer","");
@@ -382,6 +383,8 @@ public class FetchImageActivity extends AppCompatActivity
             String filepath = getFilesDir() + "/image" + i + ".jpg";
             ImageForSelection imageForSelection = new ImageForSelection(imageview, filepath);
             fullImageReference.add(imageForSelection);
+            setAllEnabled(false);
+
         }
     }
 
@@ -521,6 +524,12 @@ public class FetchImageActivity extends AppCompatActivity
 //        int resId = getResources().getIdentifier(progressbarid, "id", getPackageName());
 //        ProgressBar pb = findViewById(resId);
 //        pb.setVisibility(View.GONE);
+    }
+
+    private void setAllEnabled(boolean enabled) {
+        for (ImageForSelection ifs : fullImageReference) {
+            ifs.getImg().setEnabled(enabled);
+        }
     }
 
 

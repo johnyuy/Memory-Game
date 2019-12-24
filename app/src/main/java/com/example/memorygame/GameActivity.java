@@ -480,4 +480,28 @@ public class GameActivity extends AppCompatActivity {
         }
     }
 
+    public void peekToStart() {
+        // NEED YOUR HELP JOHN
+        Log.d("PEEKTOSTART", "here: ");
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                // Do something after 5s = 5000ms
+                int i = 1;
+                for(GridImageView giv : gridImageList) {
+                    String imgId = "img" + String.format("%02d", i);
+                    int resourceId = getResources().getIdentifier(imgId, "id", getPackageName());
+                    ImageView gridView = (ImageView) findViewById(resourceId);
+
+                    //find corresponding image
+                    ImageView img = gridImageList.get(i-1).getImg();
+                    gridView.setImageDrawable(img.getDrawable());
+                    i++;
+                }
+            }
+        }, 5000);
+
+
+    }
 }
