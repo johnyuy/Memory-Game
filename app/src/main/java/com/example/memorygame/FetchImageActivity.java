@@ -391,6 +391,7 @@ public class FetchImageActivity extends AppCompatActivity
         ImageForSelection selected = new ImageForSelection();
         int alreadyselected = 0;
         playbtn.setEnabled(false);
+        playbtn.setText(getResources().getText(R.string.pick6));
 
         // selected number 6 cannot return
         for (ImageForSelection ifs : fullImageReference) {
@@ -432,6 +433,7 @@ public class FetchImageActivity extends AppCompatActivity
                 if (selectednumber == 6) {
                     Log.d("YAY ", "NEXT BUTTON WILL APPEAR");
                     playbtn.setEnabled(true);
+                    playbtn.setText(getResources().getText(R.string.play));
 
 
 
@@ -518,6 +520,7 @@ public class FetchImageActivity extends AppCompatActivity
 //        ProgressBar pb = findViewById(resId);
 //        pb.setVisibility(View.GONE);
     }
+
 
 
 }
