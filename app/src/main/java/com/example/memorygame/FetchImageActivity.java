@@ -360,6 +360,7 @@ public class FetchImageActivity extends AppCompatActivity
     }
 
     /// CHOOSE IMAGES
+
     public void fromGameReload() {
         for (int i = 1; i < imagePaths.length; i++) {
             Log.d("BACKFROMGAME ", Integer.toString(i) + "RELOAD");
@@ -393,6 +394,7 @@ public class FetchImageActivity extends AppCompatActivity
         ImageForSelection selected = new ImageForSelection();
         int alreadyselected = 0;
         playbtn.setEnabled(false);
+        playbtn.setText(getResources().getText(R.string.pick6));
 
         // selected number 6 cannot return
         for (ImageForSelection ifs : fullImageReference) {
@@ -415,6 +417,7 @@ public class FetchImageActivity extends AppCompatActivity
                             ifschange.setSelected(!ifschange.isSelected);
                             selectedview.setAlpha(1.0f);
                             playbtn.setEnabled(true);
+                            playbtn.setText(getResources().getText(R.string.play));
                             return;
                         }
                     }
@@ -435,6 +438,30 @@ public class FetchImageActivity extends AppCompatActivity
                 if (selectednumber == 6) {
                     Log.d("YAY ", "NEXT BUTTON WILL APPEAR");
                     playbtn.setEnabled(true);
+                    playbtn.setText(getResources().getText(R.string.play));
+
+
+
+//                    for (ImageForSelection si : fullImageReference) {
+//                        if (si.isSelected) {
+//                            Log.d("FILENAMEELVL1", si.getFilepath());
+//                            selectedImages.add(si.getFilepath());
+//                        }
+//                    }
+//
+//                    Log.d("ImageForSelectionSIZE", Integer.toString(selectedImages.size()));
+//
+//                    Intent intent = new Intent(FetchImageActivity.this, GameActivity.class);
+//                    int k = 1;
+//                    for (String path : selectedImages) {
+//                        Log.d("FILENAMEE", path);
+//                        String key = Integer.toString(k);
+//                        intent.putExtra(key, path);
+//                        startActivity(intent);
+//                        k++;
+//                    }
+//                    startActivity(intent);
+
                 }
             }
         }
@@ -504,6 +531,7 @@ public class FetchImageActivity extends AppCompatActivity
             ifs.getImg().setEnabled(enabled);
         }
     }
+
 
 
 }
