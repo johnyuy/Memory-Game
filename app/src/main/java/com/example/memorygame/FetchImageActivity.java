@@ -413,6 +413,8 @@ public class FetchImageActivity extends AppCompatActivity
                         if (ifschange.getImg() == selectedview) {
                             ifschange.setSelected(!ifschange.isSelected);
                             selectedview.setAlpha(1.0f);
+                            playbtn.setEnabled(true);
+                            playbtn.setText(getResources().getText(R.string.play));
                             return;
                         }
                     }
