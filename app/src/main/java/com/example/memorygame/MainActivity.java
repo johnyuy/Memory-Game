@@ -33,13 +33,12 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences sharedPrefs = getSharedPreferences(
                 "high_score", MODE_PRIVATE);
 
+        //init High Scores if new install
         if(!sharedPrefs.contains("initialized")){
             initTestHighScores();
         }
         //save player name
         savePlayerName();
-        //init High Scores
-        initTestHighScores();
         //Display High Scores
         initHighScore();
         // test
@@ -81,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences highscore = getSharedPreferences(
                 "high_score", MODE_PRIVATE);
         final SharedPreferences.Editor editor = highscore.edit();
-        for (int i = 1; i < 7; i++) {
+        for (int i = 1; i < 6; i++) {
             String highscorekey = "HIGHSCORE_" + i;
             editor.putString(highscorekey, Integer.toString(i * 120));
             String namekey = "NAME_" + i;
