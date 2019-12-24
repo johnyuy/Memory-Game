@@ -34,11 +34,11 @@ public class MainActivity extends AppCompatActivity {
                 "high_score", MODE_PRIVATE);
 
         //init High Scores if new install
-        if(!sharedPrefs.contains("initialized")){
+        if (!sharedPrefs.contains("initialized")) {
             initTestHighScores();
         }
-        //Display Previous player's name 
-        if(sharedPrefs.contains("newplayer")) {
+        //Display Previous player's name
+        if (sharedPrefs.contains("newplayer")) {
             initPlayerName();
         }
 
@@ -105,12 +105,23 @@ public class MainActivity extends AppCompatActivity {
         editor.commit();
     }
 
-    public void initPlayerName(){
+    public void initPlayerName() {
         SharedPreferences name = getSharedPreferences(
                 "high_score", MODE_PRIVATE);
         int resId = this.getResources().getIdentifier("playername", "id", this.getPackageName());
         EditText editTextname = (EditText) findViewById(resId);
         String playername = name.getString("newplayer", "");
         editTextname.setText(playername);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        SharedPreferences highscore = getSharedPreferences(
+                "high_score", MODE_PRIVATE);
+        final SharedPreferences.Editor editor = highscore.edit();
+        Log.d("FROM", "");
+        editor.putString("from", "");
+        editor.commit();
     }
 }

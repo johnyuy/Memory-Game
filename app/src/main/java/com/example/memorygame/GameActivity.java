@@ -518,6 +518,16 @@ public class GameActivity extends AppCompatActivity {
             }
         }, 1500);
 
+    }
 
+    @Override
+    public void onStop() {
+        super.onStop();
+        SharedPreferences highscore = getSharedPreferences(
+                "high_score", MODE_PRIVATE);
+        final SharedPreferences.Editor editor = highscore.edit();
+        Log.d("FROM", "");
+        editor.putString("from", "");
+        editor.commit();
     }
 }
