@@ -48,7 +48,7 @@ public class GameActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.game);
         Toast.makeText(getApplicationContext(),"LEVEL " + gameLevel, Toast.LENGTH_SHORT).show();
-        
+
         restartBtn = findViewById(R.id.restart);
         restartBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -382,7 +382,7 @@ public class GameActivity extends AppCompatActivity {
                 //registerScore();
                 Toast.makeText(getApplicationContext(),"Well Done!", Toast.LENGTH_LONG).show();
                 ///ADD GAME SCORE HERE (JOHANN)
-//                compareHighScores("1000000");
+                compareHighScores("1000000");
 
                 //Back to main menu
                 Intent intent = new Intent(GameActivity.this, MainActivity.class);
