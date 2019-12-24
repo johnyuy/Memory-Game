@@ -30,9 +30,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        SharedPreferences sharedPrefs = getSharedPreferences(
+                "high_score", MODE_PRIVATE);
+
+        if(!sharedPrefs.contains("initialized")){
+            initTestHighScores();
+        }
         //save player name
         savePlayerName();
-        //
         //init High Scores
         initTestHighScores();
         //Display High Scores
@@ -83,6 +88,8 @@ public class MainActivity extends AppCompatActivity {
             String playername = "Player " + i;
             editor.putString(namekey, playername);
         }
+        editor.putString("initialized", "true");
+
         editor.commit();
     }
 
