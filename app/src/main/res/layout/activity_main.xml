@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#E8030303"
+    android:background="#1E1E23"
     tools:context=".FetchImageActivity">
 
 
@@ -141,8 +141,8 @@
         android:layout_marginBottom="52dp"
         android:fontFamily="serif-monospace"
         android:gravity="center"
-        android:text="new player"
         android:inputType="text"
+        android:text="new player"
         android:textColor="#BFFFFEFE"
         android:textSize="25sp"
         app:layout_constraintBottom_toTopOf="@+id/playBtn"
