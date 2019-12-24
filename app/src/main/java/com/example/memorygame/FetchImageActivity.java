@@ -550,8 +550,5 @@ public class FetchImageActivity extends AppCompatActivity
             ifs.getImg().setEnabled(enabled);
         }
     }
-
-
-
 }
 

@@ -518,6 +518,5 @@ public class GameActivity extends AppCompatActivity {
             }
         }, 1500);
 
-
     }
 }
