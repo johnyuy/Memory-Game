@@ -7,36 +7,42 @@
     android:layout_height="match_parent"
     tools:context=".GameActivity">
 
-    <TextView
-        android:id="@+id/timerView"
-        android:layout_height="0dp"
-        android:layout_width="0dp"
-        android:gravity="end|center_vertical"
-        android:text="time"
-        android:textSize="25sp"
-        android:paddingRight="20sp"
-        app:layout_constraintBottom_toTopOf="@id/grid"
-        app:layout_constraintHeight_percent="0.1"
-        app:layout_constraintWidth_percent="0.5"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/scoreView"
-        />
+    <LinearLayout
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
 
-    <TextView
-        android:id="@+id/scoreView"
-        android:layout_height="0dp"
-        android:layout_width="0dp"
-        android:gravity="start|center_vertical"
-        android:text="score : 0/6"
-        android:textSize="25sp"
-        android:paddingLeft="20sp"
-        app:layout_constraintBottom_toTopOf="@id/grid"
-        app:layout_constraintHeight_percent="0.1"
-        app:layout_constraintWidth_percent="0.5"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/timerView"
-        app:layout_constraintStart_toStartOf="parent"/>
+        android:layout_height="60dp"
+        android:orientation="horizontal"
+
+        app:layout_constraintBottom_toTopOf="@+id/grid"
+
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/scoreView"
+            style="@style/BtnStyle"
+            android:layout_gravity="center"
+            android:text="score : 0/6"
+            android:textSize="25sp" />
+
+
+        <TextView
+            android:id="@+id/levelView"
+            style="@style/BtnStyle"
+            android:text=" level : 1"
+            android:gravity="center"
+
+            android:textSize="25sp"/>
+
+        <TextView
+            android:id="@+id/timerView"
+            style="@style/BtnStyle"
+            android:gravity="center"
+            android:text="time"
+            android:textSize="25sp" />
+
+
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/grid"
@@ -45,7 +51,7 @@
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="@id/buttons"
 
-        app:layout_constraintTop_toBottomOf="@id/scoreView">
+        app:layout_constraintTop_toBottomOf="@id/textView">
 
         <LinearLayout style="@style/RowStyle">
 
