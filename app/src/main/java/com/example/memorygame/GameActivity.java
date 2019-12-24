@@ -18,6 +18,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -353,21 +354,24 @@ public class GameActivity extends AppCompatActivity {
     }
 
     public void updateScore() {
-        int score = 0;
-        int elapsedTime = Integer.parseInt(timerView.getText().toString()) - markedTime;
-        Log.d("FLIPDUKO", String.format("Elapsed Time = " + timerView.getText().toString()));
-        markedTime = Integer.parseInt(timerView.getText().toString());
 
+        int elapsedTime =Integer.valueOf(timerView.getText().toString()) - markedTime;
+        finalScore = finalScore + processScore(elapsedTime);
+        Log.d("FLIPDUKO", String.format("Elapsed Time = " + elapsedTime));
+        markedTime = Integer.valueOf(timerView.getText().toString());
+
+
+        int score = 0;
         for (int i = 0; i < gridImages.length; i++) {
             if (gridImages[i].isSolved()) {
                 score++;
             }
         }
         score /= 2;
-        TextView scoretext = (TextView) findViewById(R.id.scoreView);
-        scoretext.setText("score : " + score + "/6");
         gameScore = score;
 
+        TextView scoretext = (TextView) findViewById(R.id.scoreView);
+        scoretext.setText("score : " + finalScore);
 
 
         if (gameScore == gameImages.length + 1) {
@@ -379,7 +383,7 @@ public class GameActivity extends AppCompatActivity {
                 nextLevel();
             } else {
                 timer.cancel();
-                //registerScore();
+
                 Toast.makeText(getApplicationContext(),"Well Done!", Toast.LENGTH_LONG).show();
                 ///ADD GAME SCORE HERE (JOHANN)
                 compareHighScores("1000000");
@@ -390,6 +394,22 @@ public class GameActivity extends AppCompatActivity {
             }
         }
 
+    }
+
+    int processScore(int elapsedTime){
+        if (elapsedTime > 11)
+            return 2;
+        if (elapsedTime > 9)
+            return 3;
+        if (elapsedTime > 7)
+            return 4;
+        if (elapsedTime > 5)
+            return 5;
+        if (elapsedTime > 4)
+            return 6;
+        if (elapsedTime > 3)
+            return 7;
+        return 8;
     }
 
     public void updateTimer() {
