@@ -113,15 +113,4 @@ public class MainActivity extends AppCompatActivity {
         String playername = name.getString("newplayer", "");
         editTextname.setText(playername);
     }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        SharedPreferences highscore = getSharedPreferences(
-                "high_score", MODE_PRIVATE);
-        final SharedPreferences.Editor editor = highscore.edit();
-        Log.d("FROM", "");
-        editor.putString("from", "");
-        editor.commit();
-    }
 }

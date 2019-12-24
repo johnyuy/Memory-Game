@@ -550,15 +550,5 @@ public class FetchImageActivity extends AppCompatActivity
             ifs.getImg().setEnabled(enabled);
         }
     }
-    @Override
-    public void onStop() {
-        super.onStop();
-        SharedPreferences highscore = getSharedPreferences(
-                "high_score", MODE_PRIVATE);
-        final SharedPreferences.Editor editor = highscore.edit();
-        Log.d("FROM", "");
-        editor.putString("from", "");
-        editor.commit();
-    }
 }
 
