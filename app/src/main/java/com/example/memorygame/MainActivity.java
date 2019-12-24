@@ -37,8 +37,8 @@ public class MainActivity extends AppCompatActivity {
         if(!sharedPrefs.contains("initialized")){
             initTestHighScores();
         }
-        //save player name
-        savePlayerName();
+//        //save player name
+//        savePlayerName();
         //Display High Scores
         initHighScore();
 
@@ -47,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, FetchImageActivity.class);
+                savePlayerName();
                 startActivity(intent);
             }
         });
