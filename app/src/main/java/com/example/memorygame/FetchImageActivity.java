@@ -73,7 +73,8 @@ public class FetchImageActivity extends AppCompatActivity
             if (b.getString("from").equals("game")) {
                 //DISPLAY PREVIOUS SEARCH
                 fromGameReload();
-
+                initGridReferences();
+                setAllEnabled(true);
             }
         }
 
@@ -82,7 +83,6 @@ public class FetchImageActivity extends AppCompatActivity
         bar = findViewById(R.id.progressBar);
         pb01 = findViewById(R.id.pb01);
 
-        initGridReferences();
         playbtn = (Button)findViewById(R.id.playBtn);
         playbtn.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -377,11 +377,6 @@ public class FetchImageActivity extends AppCompatActivity
                 fetchservice.execute(htmlcode);
             }
         });
-
-
-
-
-
     }
 
     /// CHOOSE IMAGES
@@ -397,6 +392,7 @@ public class FetchImageActivity extends AppCompatActivity
             int resId = getResources().getIdentifier(imageViewId, "id", getPackageName());
             ImageView imageView = findViewById(resId);
             imageView.setImageBitmap(bitmap);
+            imageView.setEnabled(true);
         }
     }
 
@@ -409,7 +405,6 @@ public class FetchImageActivity extends AppCompatActivity
             ImageForSelection imageForSelection = new ImageForSelection(imageview, filepath);
             fullImageReference.add(imageForSelection);
             setAllEnabled(false);
-
         }
     }
 
