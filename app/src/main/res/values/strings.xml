@@ -3,4 +3,5 @@
     <string name="webUrl">https://stocksnap.io/search/</string>
     <string name="pick6">Pick 6!</string>
     <string name="play">PLAY!</string>
+    <string name="inputtext">Input text</string>
 </resources>

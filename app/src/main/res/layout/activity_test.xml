@@ -56,12 +56,12 @@
 
     <EditText
         android:id="@+id/htmlurl"
-        android:layout_width="186dp"
-        android:layout_height="37dp"
+        android:layout_width="209dp"
+        android:layout_height="44dp"
         android:backgroundTint="#4D6B6969"
         android:ems="10"
+        android:hint="@string/inputtext"
         android:inputType="textUri"
-        android:text="dogs"
         android:textAlignment="textEnd"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
