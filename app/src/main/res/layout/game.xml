@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#2A2A2C"
     tools:context=".GameActivity">
 
     <LinearLayout
@@ -18,27 +18,29 @@
 
         app:layout_constraintTop_toTopOf="parent">
 
+
         <TextView
             android:id="@+id/scoreView"
             style="@style/BtnStyle"
             android:layout_gravity="center"
-            android:text="score : 0"
+            android:text="Score : 0"
+            android:textColor="#F3F3F3"
             android:textSize="25sp" />
-
 
         <TextView
             android:id="@+id/levelView"
             style="@style/BtnStyle"
-            android:text=" level : 1"
             android:gravity="center"
-
-            android:textSize="25sp"/>
+            android:text="Level : 1"
+            android:textColor="#F3F3F3"
+            android:textSize="25sp" />
 
         <TextView
             android:id="@+id/timerView"
             style="@style/BtnStyle"
             android:gravity="center"
-            android:text="time"
+            android:text="Time"
+            android:textColor="#F3F3F3"
             android:textSize="25sp" />
 
 
@@ -94,6 +96,7 @@
             <ImageView
                 android:id="@+id/img07"
                 style="@style/ImageStyle"
+                android:background="#010101"
                 android:src="@drawable/blank2" />
 
             <ImageView
@@ -139,53 +142,39 @@
 
         <ImageButton
             android:id="@+id/menu"
-            app:srcCompat="@drawable/menu"
-            android:background="@android:color/transparent"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_marginBottom="5dp"
-            android:layout_marginLeft="2dp"
-            android:layout_marginRight="5dp"
-            android:layout_marginTop="0dp"
             android:layout_weight="1"
             android:adjustViewBounds="true"
-            android:padding="10dp"
+            android:background="@android:color/transparent"
+            android:padding="2dp"
             android:scaleType="fitCenter"
+            app:srcCompat="@drawable/menu" />
 
-            />
         <ImageButton
             android:id="@+id/restart"
-            app:srcCompat="@drawable/restart"
-            android:background="@android:color/transparent"
-
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_marginBottom="5dp"
-            android:layout_marginLeft="2dp"
-            android:layout_marginRight="5dp"
-            android:layout_marginTop="0dp"
+
             android:layout_weight="1"
             android:adjustViewBounds="true"
-            android:padding="10dp"
-            android:scaleType="fitCenter"/>
+            android:background="@android:color/transparent"
+            android:padding="2dp"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/restarter" />
 
 
         <ImageButton
             android:id="@+id/back"
-            app:srcCompat="@drawable/back"
-            android:background="@android:color/transparent"
-
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_marginBottom="5dp"
-            android:layout_marginLeft="2dp"
-            android:layout_marginRight="5dp"
-            android:layout_marginTop="0dp"
+
             android:layout_weight="1"
             android:adjustViewBounds="true"
-            android:padding="10dp"
+            android:background="@android:color/transparent"
+            android:padding="2dp"
             android:scaleType="fitCenter"
-            />
+            app:srcCompat="@drawable/backer" />
 
 
     </LinearLayout>
