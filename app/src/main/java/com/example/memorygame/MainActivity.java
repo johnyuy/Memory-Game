@@ -37,9 +37,11 @@ public class MainActivity extends AppCompatActivity {
         if(!sharedPrefs.contains("initialized")){
             initTestHighScores();
         }
-//        //save player name
-//        savePlayerName();
-        //Display High Scores
+        //Display Previous player's name 
+        if(sharedPrefs.contains("newplayer")) {
+            initPlayerName();
+        }
+
         initHighScore();
 
         game = findViewById(R.id.playBtn);
@@ -72,6 +74,7 @@ public class MainActivity extends AppCompatActivity {
             TextView textViewname = (TextView) findViewById(resId);
             String playername = sphighscore.getString(namekey, "");
             textViewname.setText(playername);
+
         }
     }
 
@@ -87,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
             editor.putString(namekey, playername);
         }
         editor.putString("initialized", "true");
-
+        editor.putString("newplayer", "New Player");
         editor.commit();
     }
 
@@ -100,5 +103,14 @@ public class MainActivity extends AppCompatActivity {
         Log.d("ENTERNAME", playerNameStr);
         editor.putString("newplayer", playerNameStr);
         editor.commit();
+    }
+
+    public void initPlayerName(){
+        SharedPreferences name = getSharedPreferences(
+                "high_score", MODE_PRIVATE);
+        int resId = this.getResources().getIdentifier("playername", "id", this.getPackageName());
+        EditText editTextname = (EditText) findViewById(resId);
+        String playername = name.getString("newplayer", "");
+        editTextname.setText(playername);
     }
 }

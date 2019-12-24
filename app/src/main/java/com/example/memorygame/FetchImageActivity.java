@@ -78,7 +78,6 @@ public class FetchImageActivity extends AppCompatActivity
             }
         }
 
-
         htmlTxt = (EditText) findViewById(R.id.htmlurl);
         bar = findViewById(R.id.progressBar);
         pb01 = findViewById(R.id.pb01);
