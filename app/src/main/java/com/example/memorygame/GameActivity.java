@@ -427,6 +427,9 @@ public class GameActivity extends AppCompatActivity {
     public void nextLevel(){
         gameLevel ++;
 
+        TextView level=findViewById(R.id.levelView);
+        level.setText(" level : " + gameLevel);
+
         Toast.makeText(getApplicationContext(),"LEVEL " + gameLevel, Toast.LENGTH_SHORT).show();
 
         for(int i = 0; i <gridImages.length; i++){
