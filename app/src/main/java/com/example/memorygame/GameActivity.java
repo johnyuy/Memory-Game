@@ -1,6 +1,7 @@
 package com.example.memorygame;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.ColorMatrix;
@@ -23,6 +24,7 @@ import android.widget.Toast;
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -46,6 +48,7 @@ public class GameActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.game);
         Toast.makeText(getApplicationContext(),"LEVEL " + gameLevel, Toast.LENGTH_SHORT).show();
+
         restartBtn = findViewById(R.id.restart);
         restartBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,6 +65,7 @@ public class GameActivity extends AppCompatActivity {
                 intent.putExtra("from","self");
                 startActivity(intent);
             }
+
         });
 
         backBtn = findViewById(R.id.back);
@@ -86,10 +90,7 @@ public class GameActivity extends AppCompatActivity {
 
 
         timerView = (TextView) findViewById(R.id.timerView);
-
-
         initImages();
-
         initRandom(this.gridImageList);
 
         //Answers log
@@ -380,6 +381,12 @@ public class GameActivity extends AppCompatActivity {
                 timer.cancel();
                 //registerScore();
                 Toast.makeText(getApplicationContext(),"Well Done!", Toast.LENGTH_LONG).show();
+                ///ADD GAME SCORE HERE (JOHANN)
+                compareHighScores("1000000");
+
+                //Back to main menu
+                Intent intent = new Intent(GameActivity.this, MainActivity.class);
+                startActivity(intent);
             }
         }
 
@@ -418,4 +425,56 @@ public class GameActivity extends AppCompatActivity {
         initBlanks();
         setAllEnabled(true);
     }
+
+
+
+    public void compareHighScores(String newscore) {
+        ArrayList<HighScore> highscores = new ArrayList<HighScore>();
+        // get array of high score
+        SharedPreferences sphighscore = getSharedPreferences(
+                "high_score", MODE_PRIVATE);
+        String playername = sphighscore.getString("newplayer", "");
+        Log.d("PLAYERNAME", playername);
+        for (int i = 1; i < 6; i++) {
+            String highscorekey = "HIGHSCORE_" + i;
+            String highscore = sphighscore.getString(highscorekey, "");
+            String namekey = "NAME_" + i;
+            String topplayername = sphighscore.getString(namekey, "");
+            highscores.add(new HighScore(topplayername, Integer.valueOf(highscore)));
+        }
+        highscores.add(new HighScore(playername, Integer.valueOf(newscore)));
+        Log.d("highscores123", Integer.toString(highscores.size()));
+
+        HighScore[] hsa = highscores.toArray(new HighScore[highscores.size()]);
+        Arrays.sort(hsa, Collections.reverseOrder());
+        for (HighScore hs : hsa) {
+            System.out.println(hs.getName() + " : " + hs.getHighscore());
+        }
+        ArrayList<HighScore> topfive = new ArrayList<HighScore>();
+        for (int i = 0; i < 5; i++) {
+            topfive.add(hsa[i]);
+        }
+        Log.d("topfive", Integer.toString(topfive.size()));
+        saveHighScores(topfive);
+    }
+
+    public void saveHighScores(ArrayList<HighScore> topfive) {
+        SharedPreferences highscore = getSharedPreferences(
+                "high_score", MODE_PRIVATE);
+        final SharedPreferences.Editor editor = highscore.edit();
+        int i = 1;
+        for (HighScore hs : topfive) {
+            String highscorekey = "HIGHSCORE_" + i;
+            editor.putString(highscorekey, hs.getHighscore().toString());
+            String namekey = "NAME_" + i;
+            editor.putString(namekey, hs.getName());
+            i++;
+        }
+        editor.commit();
+
+        for (HighScore hs : topfive) {
+            Log.d("TOPFIVEHIGH", hs.getName() + " : " + hs.getHighscore().toString());
+        }
+    }
+
 }
