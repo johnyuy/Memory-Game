@@ -48,7 +48,6 @@ public class GameActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.game);
-        Toast.makeText(getApplicationContext(),"LEVEL " + gameLevel, Toast.LENGTH_SHORT).show();
 
         restartBtn = findViewById(R.id.restart);
         restartBtn.setOnClickListener(new View.OnClickListener() {
@@ -73,6 +72,7 @@ public class GameActivity extends AppCompatActivity {
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
+                compareHighScores(String.valueOf(finalScore));
                 Intent intent = new Intent(GameActivity.this, FetchImageActivity.class);
                 intent.putExtra("from","game");
                 startActivity(intent);
@@ -84,6 +84,7 @@ public class GameActivity extends AppCompatActivity {
         menuBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
+                compareHighScores(String.valueOf(finalScore));
                 Intent intent = new Intent(GameActivity.this, MainActivity.class);
                 startActivity(intent);
             }
@@ -93,6 +94,7 @@ public class GameActivity extends AppCompatActivity {
         timerView = (TextView) findViewById(R.id.timerView);
         initImages();
         initRandom(this.gridImageList);
+        peekToStart();
 
         //Answers log
         for (GridImageView img : gridImages) {
@@ -111,7 +113,7 @@ public class GameActivity extends AppCompatActivity {
             Bitmap bitmap = BitmapFactory.decodeFile(imagepath);
 
             ifrestartimgs.add(imagepath);
-            Log.d("IMAGEPATH", imagepath);
+            //Log.d("IMAGEPATH", imagepath);
             String imgId = "item" + i;
             int resourceId = this.getResources().getIdentifier(imgId, "drawable", this.getPackageName());
 
@@ -289,7 +291,7 @@ public class GameActivity extends AppCompatActivity {
                 flipToHide(selection2);
                 updateEnabled();
             }
-        }, 2000);
+        }, 1800);
     }
 
     public boolean compareSelections() {
@@ -357,7 +359,8 @@ public class GameActivity extends AppCompatActivity {
 
         int elapsedTime =Integer.valueOf(timerView.getText().toString()) - markedTime;
         finalScore = finalScore + processScore(elapsedTime);
-        Log.d("FLIPDUKO", String.format("Elapsed Time = " + elapsedTime));
+
+        Log.d("FLIPDUKO", String.format("Elapsed Time = " + elapsedTime + " , +score = " + processScore(elapsedTime)));
         markedTime = Integer.valueOf(timerView.getText().toString());
 
 
@@ -378,7 +381,6 @@ public class GameActivity extends AppCompatActivity {
             Log.d("FLIPDOKU", "STOP LEVEL" + gameScore);
             //
             if(gameLevel<3){
-                finalScore += gameScore;
                 gameScore=0;
                 nextLevel();
             } else {
@@ -386,7 +388,7 @@ public class GameActivity extends AppCompatActivity {
 
                 Toast.makeText(getApplicationContext(),"Well Done!", Toast.LENGTH_LONG).show();
                 ///ADD GAME SCORE HERE (JOHANN)
-                compareHighScores("1000000");
+                compareHighScores(String.valueOf(finalScore));
 
                 //Back to main menu
                 Intent intent = new Intent(GameActivity.this, MainActivity.class);
@@ -398,18 +400,18 @@ public class GameActivity extends AppCompatActivity {
 
     int processScore(int elapsedTime){
         if (elapsedTime > 11)
-            return 2;
+            return 20;
         if (elapsedTime > 9)
-            return 3;
+            return 30;
         if (elapsedTime > 7)
-            return 4;
+            return 40;
         if (elapsedTime > 5)
-            return 5;
+            return 50;
         if (elapsedTime > 4)
-            return 6;
+            return 60;
         if (elapsedTime > 3)
-            return 7;
-        return 8;
+            return 70;
+        return 80;
     }
 
     public void updateTimer() {
@@ -444,8 +446,7 @@ public class GameActivity extends AppCompatActivity {
 
         if(gameLevel>2)
             initRotate();
-
-        initBlanks();
+        peekToStart();
         setAllEnabled(true);
     }
 
@@ -501,26 +502,21 @@ public class GameActivity extends AppCompatActivity {
     }
 
     public void peekToStart() {
-        // NEED YOUR HELP JOHN
         Log.d("PEEKTOSTART", "here: ");
-        final Handler handler = new Handler();
+
+        setAllEnabled(false);
+        for(int i = 1; i <=gridImages.length; i++){
+            ImageView img = getGridImageView(i);
+            img.setImageDrawable(gridImages[i-1].getImg().getDrawable());
+        }
+        Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                // Do something after 5s = 5000ms
-                int i = 1;
-                for(GridImageView giv : gridImageList) {
-                    String imgId = "img" + String.format("%02d", i);
-                    int resourceId = getResources().getIdentifier(imgId, "id", getPackageName());
-                    ImageView gridView = (ImageView) findViewById(resourceId);
-
-                    //find corresponding image
-                    ImageView img = gridImageList.get(i-1).getImg();
-                    gridView.setImageDrawable(img.getDrawable());
-                    i++;
-                }
+                initBlanks();
+                setAllEnabled(true);
             }
-        }, 5000);
+        }, 1500);
 
 
     }
