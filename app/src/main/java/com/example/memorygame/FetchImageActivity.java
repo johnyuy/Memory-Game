@@ -160,6 +160,10 @@ public class FetchImageActivity extends AppCompatActivity
                 if (bar.getVisibility() == View.INVISIBLE) {
                     bar.setVisibility(View.VISIBLE);
                 }
+
+                fullImageReference = new ArrayList<ImageForSelection>();
+                initGridReferences();
+
                 //hide keyboard
                 try {
                     InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -175,6 +179,7 @@ public class FetchImageActivity extends AppCompatActivity
                         String ImageViewStr = "img" + String.format("%02d", k);
                         int ImagViewId = getResources().getIdentifier(ImageViewStr, "id", getPackageName());
                         ImageView iv = findViewById(ImagViewId);
+                        iv.setAlpha(1.0f);
                         iv.setImageResource(R.drawable.white);
                     }
                 }
@@ -200,6 +205,10 @@ public class FetchImageActivity extends AppCompatActivity
                 if (bar.getVisibility() == View.INVISIBLE) {
                     bar.setVisibility(View.VISIBLE);
                 }
+
+                fullImageReference = new ArrayList<ImageForSelection>();
+                initGridReferences();
+
                 //hide keyboard
                 try {
                     InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -215,6 +224,7 @@ public class FetchImageActivity extends AppCompatActivity
                         String ImageViewStr = "img" + String.format("%02d", k);
                         int ImagViewId = getResources().getIdentifier(ImageViewStr, "id", getPackageName());
                         ImageView iv = findViewById(ImagViewId);
+                        iv.setAlpha(1.0f);
                         iv.setImageResource(R.drawable.white);
                     }
                 }
@@ -240,6 +250,10 @@ public class FetchImageActivity extends AppCompatActivity
                 if (bar.getVisibility() == View.INVISIBLE) {
                     bar.setVisibility(View.VISIBLE);
                 }
+
+                fullImageReference = new ArrayList<ImageForSelection>();
+                initGridReferences();
+
                 //hide keyboard
                 try {
                     InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -255,6 +269,7 @@ public class FetchImageActivity extends AppCompatActivity
                         String ImageViewStr = "img" + String.format("%02d", k);
                         int ImagViewId = getResources().getIdentifier(ImageViewStr, "id", getPackageName());
                         ImageView iv = findViewById(ImagViewId);
+                        iv.setAlpha(1.0f);
                         iv.setImageResource(R.drawable.white);
                     }
                 }
@@ -280,6 +295,10 @@ public class FetchImageActivity extends AppCompatActivity
                 if (bar.getVisibility() == View.INVISIBLE) {
                     bar.setVisibility(View.VISIBLE);
                 }
+
+                fullImageReference = new ArrayList<ImageForSelection>();
+                initGridReferences();
+
                 //hide keyboard
                 try {
                     InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -295,6 +314,7 @@ public class FetchImageActivity extends AppCompatActivity
                         String ImageViewStr = "img" + String.format("%02d", k);
                         int ImagViewId = getResources().getIdentifier(ImageViewStr, "id", getPackageName());
                         ImageView iv = findViewById(ImagViewId);
+                        iv.setAlpha(1.0f);
                         iv.setImageResource(R.drawable.white);
                     }
                 }
@@ -320,6 +340,10 @@ public class FetchImageActivity extends AppCompatActivity
                 if (bar.getVisibility() == View.INVISIBLE) {
                     bar.setVisibility(View.VISIBLE);
                 }
+
+                fullImageReference = new ArrayList<ImageForSelection>();
+                initGridReferences();
+
                 //hide keyboard
                 try {
                     InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -335,6 +359,7 @@ public class FetchImageActivity extends AppCompatActivity
                         String ImageViewStr = "img" + String.format("%02d", k);
                         int ImagViewId = getResources().getIdentifier(ImageViewStr, "id", getPackageName());
                         ImageView iv = findViewById(ImagViewId);
+                        iv.setAlpha(1.0f);
                         iv.setImageResource(R.drawable.white);
                     }
                 }
