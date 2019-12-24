@@ -422,7 +422,6 @@ public class GameActivity extends AppCompatActivity {
         if(gameLevel>2)
             initRotate();
 
-        peekToStart();
         initBlanks();
         setAllEnabled(true);
     }
