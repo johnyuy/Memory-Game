@@ -102,6 +102,7 @@ public class DownloadImage extends AsyncTask<String, Integer, Integer> {
         int resId = parent.getResources().getIdentifier(imageViewId, "id", parent.getPackageName());
         ImageView imageView = parent.findViewById(resId);
         imageView.setImageBitmap(bitmap);
+        imageView.setEnabled(true);
 
         String progressbarid = "pb" + String.format("%02d", i);
 
